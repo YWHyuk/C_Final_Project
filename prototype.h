@@ -40,7 +40,7 @@ void rent_store(Player* player, Store* store); //사용자의 입력을 받아 �
 
 void kick_store(Player* player, Store* store);//사용자의 입력을 받아 쫓아내기=============>이지훈
 
-void expand_BLD(Building* building);//건물확장     =============> 이지훈
+void expand_BLD(Player* player, Building* building);//건물확장     =============> 이지훈
 
 //========================================================================== =
 
