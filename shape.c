@@ -2,16 +2,16 @@
 
 Cell get_Cell(Shape* shape, unsigned int x, unsigned int y) {
 	unsigned int index;
-	/* º¸´Â °üÁ¡¿¡¼­ °¡·Î ¼¼·Î¸¦ °Ë»ç */
+	/* ë³´ëŠ” ê´€ì ì—ì„œ ê°€ë¡œ ì„¸ë¡œë¥¼ ê²€ì‚¬ */
 	if (x >= get_Width(shape) || y >= get_Height(shape)) {
 		fprintf(stderr, "get cell index out!\n");
-		/* ¿¹¿Ü Ã³¸® */
+		/* ì˜ˆì™¸ ì²˜ë¦¬ */
 		return nexist;
 	}
-	/* º¸´Â °üÁ¡¿¡ µû¶ó ÀÎµ¦½º °è»ê */
+	/* ë³´ëŠ” ê´€ì ì— ë”°ë¼ ì¸ë±ìŠ¤ ê³„ì‚° */
 	switch (shape->direction) {
 	case north:
-		index = (shape->width - 1 - x) + shape->width * (shape->height - y);
+		index = (shape->width - 1 - x) + shape->width * (shape->height - y - 1);
 		break;
 	case east:
 		index = (shape->width - 1 - y) + x * shape->width;
@@ -20,7 +20,7 @@ Cell get_Cell(Shape* shape, unsigned int x, unsigned int y) {
 		index = x + shape->width * y;
 		break;
 	case west:
-		index = y + shape->width * (shape->height - x);
+		index = y + shape->width * (shape->height - x - 1);
 		break;
 	}
 	return shape->map[index];
@@ -58,7 +58,7 @@ Shape * make_Shape() {
 	shape->map = map;
 	shape->direction = south;
 
-	/* ·£´ıÀ¸·Î ¸ğ¾ç »ı¼º */
+	/* ëœë¤ìœ¼ë¡œ ëª¨ì–‘ ìƒì„± */
 	tmp_index = rand() % (width * height);
 	map[tmp_index] = exist;
 
@@ -107,9 +107,9 @@ void print_Shape(Shape* shape) {
 		for (int y = 0; y < height; y++) {
 			Cell tmp = get_Cell(shape, x, y);
 			if (tmp == exist)
-				printf("¡á");
+				printf("â– ");
 			else
-				printf("¡à");
+				printf("â–¡");
 		}
 		printf("\n");
 	}
@@ -125,4 +125,23 @@ int main() {
 		getchar();
 	}
 	getchar();
+}
+
+/* for demo */
+int main() {
+	srand(time(NULL));
+	Shape* test = make_Shape();
+	print_Shape(test);
+	getchar();
+	rotate_Clock(test);
+	print_Shape(test);
+	getchar();
+	rotate_Clock(test);
+	print_Shape(test);
+	getchar();
+	rotate_Clock(test);
+	print_Shape(test);
+	getchar();
+
+
 }
