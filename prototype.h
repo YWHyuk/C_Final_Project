@@ -52,7 +52,7 @@ void refresh_store(Player* player); // 가게들을 만들어 Player의 임대�
 
 void make_store(Player* player);// 가게 하나를 만들어 Player의 임대안된리스트에 넣음 =============>김민혁
 
-Building* init_BLD(); //건물만들기 =============> 김민혁
+void init_BLD(Player* player); //건물만들기 =============> 
 
 Player* init_player(); //============ = > 김민혁
 
