@@ -2,10 +2,10 @@
 typedef struct player {
 	char* name;
 	Building* building; // 소유한 건물
-	Store** contracted_store; //임대된 가게 리스트
+	Store* contracted_store; //임대된 가게 리스트
 	int money; //건물주 재산
 	int tax; // 층의 수에 따른 세금
-	Store** uncontracted_store;//임대안된 가게 리스트
+	Store* uncontracted_store;//임대안된 가게 리스트
 }Player;
 
 typedef struct cell{
