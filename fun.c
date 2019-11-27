@@ -32,6 +32,8 @@ int makeWidth(int height, Building*** b_addr) {
 }
 void init_BLD(Player* player) {
 	Building **building;
+	player->uncontracted_store = (Store*)malloc(sizeof(Store) * SNUM);
+	player->contracted_store = (Store*)malloc(sizeof(Store) * SNUM);
 	int height = 0;
 	height = makeHeight(&building);
 	makeWidth(height,&building);
