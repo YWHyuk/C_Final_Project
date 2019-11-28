@@ -1,0 +1,29 @@
+void expand_BLD(Player* player, Building** b_addr) {
+	//층을 확장하고 그만큼의 돈을 player money에서 삭감 이 작업은 차후 구현
+	int add_height,width;
+	int i = 0;
+	int height = player->building->height;
+	printf("확장할 건물의 층 수를 입력하세요 : ");
+	scanf("%d", &add_height);
+	printf("=======================================================\n");
+	*b_addr = (Building *)realloc(*b_addr,sizeof(Building)*(height +1+(add_height)));
+	for (i = 0; i < add_height; i++) {
+		printf("%d층 크기 : ", (i + 1+(add_height)));
+		scanf("%d", &width);
+		(*b_addr)->cell = (Cell*)malloc(sizeof(Cell)*width);
+		printf("\t%d 층에  %d칸을 생성했습니다.\n", (i + 1+(add_height)), width);
+		(*(*b_addr + i+(add_height))).width = width;
+	}
+
+	printf("=======================================================\n");
+}
+
+/*int main()
+{
+	Player p;
+	
+	init_BLD(&p);
+	expand_BLD(&p, &(p.building)); // 메인에서 이렇게 선언해줘야 터지지 않고 돌아가더라구요
+	return 0;
+
+}*/
