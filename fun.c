@@ -17,7 +17,7 @@ int makeHeight(Building** b_addr) {
 	printf("층수를 입력하세요 : ");
 	scanf("%d", &height);
 	printf("====================================================== =\n");
-	*b_addr = (Building *)malloc(sizeof(Building*)*height + 1);
+	*b_addr = (Building *)malloc(sizeof(Building)*height + 1);
 	(*b_addr)->height = height;
 	return height;
 }
