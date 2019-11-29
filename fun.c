@@ -17,7 +17,8 @@ int makeHeight(Building** b_addr) {
 	printf("층수를 입력하세요 : ");
 	scanf("%d", &height);
 	printf("====================================================== =\n");
-	*b_addr = (Building *)malloc(sizeof(Building)*height + 1);
+	*b_addr = (Building *)malloc(sizeof(Building)*height);
+	memset(*b_addr, 0x0, sizeof(Building)*height);
 	(*b_addr)->height = height;
 	return height;
 }
@@ -30,6 +31,7 @@ int makeWidth(int height, Building** b_addr) {
 		scanf("%d", &width);
 		(*b_addr)->cell = (Cell*)malloc(sizeof(Cell*)*width);
 		printf("\t%d 층에  %d칸을 생성했습니다.\n", i + 1, width);
+		memset((*b_addr)->cell, 0x0, sizeof(Cell)*width);
 		(*(*b_addr+i)).width = width;
 	
 	}
