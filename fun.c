@@ -45,12 +45,12 @@ void simulate(Player * player) {
 	int profit = 0; // 플레이어 이익
 	int num = 0; //가게수
 	int i = 0;
-	num = _msize(player->uncontracted_store) / sizeof(Store);
+	num = _msize(player->contracted_store) / sizeof(Store);
 	for (i = 0; i < num; i++) {
-		player->uncontracted_store[i].money = player->uncontracted_store[i].income - player->uncontracted_store[i].rent;
+		player->contracted_store[i].money = player->contracted_store[i].income - player->contracted_store[i].rent;
 		//각 가게 자산 = 수익 - 임대료
 		//렌트비 못내면 어떻게 할지 구현
-		player->money += player->uncontracted_store[i].rent;//각 가게 임대료만큼 플레이어 자산 증가
+		player->money += player->contracted_store[i].rent;//각 가게 임대료만큼 플레이어 자산 증가
 	}
 	player->money -= (player->building->height * TAX);//층*세금 만큼 플레이어 자산 감소
 
