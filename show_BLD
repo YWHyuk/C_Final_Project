@@ -7,7 +7,7 @@ void show_BLD(Player* player, Building** b_addr) {
 
 	printf("-------------------------------------\n");
 	for (i = height; i > 0; i--) {
-		printf("%d층: ", i);
+		printf("%2d층: ", i);
 		floorSize = _msize((*b_addr + i - 1)->cell) / sizeof(Cell);
 
 		for (j = 0; j < floorSize; j++) {
