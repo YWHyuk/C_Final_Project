@@ -8,7 +8,7 @@ void expand_BLD(Player* player, Building** b_addr) {
 	printf("=======================================================\n");
 	*b_addr = (Building *)realloc(*b_addr,sizeof(Building)*(height +1+(add_height)));
 	for (i = 0; i < add_height; i++) {
-		printf("%d층 크기 : ", (i + 1+(add_height)));
+		printf("%d층 크기 : ", (height+ 1) + i);
 		scanf("%d", &width);
 		(*b_addr)->cell = (Cell*)malloc(sizeof(Cell)*width);
 		printf("\t%d 층에  %d칸을 생성했습니다.\n", (i + 1+(add_height)), width);
