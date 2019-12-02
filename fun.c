@@ -19,7 +19,7 @@ int makeHeight(Building* b_addr) {
 	printf("====================================================== =\n");
 	b_addr->floor = (Floor*)malloc(sizeof(Floor)*height);
 	memset(b_addr->floor, 0x0, sizeof(Floor)*height);
-	(b_addr->floor)->height = height;
+	b_addr->level = height;
 	return height;
 }
 
@@ -30,10 +30,9 @@ int makeWidth(int height, Building* b_addr) {
 		printf("%d층 크기 : ", i + 1);
 		scanf("%d", &width);
 		(b_addr->floor+i)->cell = (Cell*)malloc(sizeof(Cell)*width*width);
-		printf("\t%d 층에  %d칸을 생성했습니다.\n", i + 1, width);
+		printf("\t%d 층에  (%d,%d)칸을 생성했습니다.\n", i + 1, width,width);
 		memset((b_addr->floor)->cell, 0x0, sizeof(Cell)*width*width);
 		(b_addr->floor+i)->width = width;
-	
 	}
 	
 	printf("====================================================== =\n");
@@ -52,7 +51,7 @@ void simulate(Player * player) {
 		//렌트비 못내면 어떻게 할지 구현
 		player->money += player->contracted_store[i].rent;//각 가게 임대료만큼 플레이어 자산 증가
 	}
-	player->money -= (player->building.floor->height * TAX);//층*세금 만큼 플레이어 자산 감소
+	player->money -= (player->building.level * TAX);//층*세금 만큼 플레이어 자산 감소
 
 }//프로토타입과 달리 인자에서 Store*를 뺐습니다.
 
