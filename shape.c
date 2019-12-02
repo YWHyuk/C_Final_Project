@@ -39,16 +39,17 @@ void rotate_Clock(Shape* shape) {
 void rotate_CounterClock(Shape* shape) {
 	shape->direction = (shape->direction + 3) % 4;
 }
-Shape * make_Shape() {
+Shape * make_Shape(int row, int size) {
 	Shape* shape;
 	Cell* map;
 	int tmp_index;
 	int tmp_x, tmp_y;
-	int width, height, size;
+	int width, height,rand_size;
 	int i;
-	width = (rand() % 10) + 2;
-	height = (rand() % 10) + 2;
-	size = rand() % ((width * height)- 3) + 3;
+	height = width = row; //정사각형을 가정
+	rand_size = (rand() % 5) - 2;
+	rand_size += size;
+	rand_size = rand_size > 0 ? rand_size: size;
 
 	shape = (Shape*)malloc(sizeof(Shape));
 	map = (Cell*)malloc(sizeof(Cell)*(width*height));
@@ -119,7 +120,7 @@ void print_Shape(Shape* shape) {
 int main() {
 	srand(time(NULL));
 	for (int i = 0; i < 100; i++) {
-		Shape* test = make_Shape();
+		Shape* test = make_Shape(4,4);
 		print_Shape(test);
 		delete_Shape(test);
 		getchar();
@@ -130,7 +131,7 @@ int main() {
 /* for demo */
 int main() {
 	srand(time(NULL));
-	Shape* test = make_Shape();
+	Shape* test = make_Shape(4,4);
 	print_Shape(test);
 	getchar();
 	rotate_Clock(test);
