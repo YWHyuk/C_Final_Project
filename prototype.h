@@ -22,11 +22,15 @@ typedef struct store {
 	int id; // 가게 식별 번호
 }Store;
 
-typedef struct building{
-	Cell* cell; //방
-	int height; //높이
-	int width; //폭
-}Building;
+typdef struct building{
+	Floor* floor;
+	int level; //층 수
+}
+typedef struct floor{
+	Cell* cell; //한 층의 칸들
+	int height; //가로
+	int width; //세로
+}Floor;
 
 
 typedef struct shape{
