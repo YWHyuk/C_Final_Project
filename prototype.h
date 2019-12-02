@@ -25,7 +25,8 @@ typedef struct store {
 typdef struct building{
 	Floor* floor;
 	int level; //층 수
-}
+}Building;
+
 typedef struct floor{
 	Cell* cell; //한 층의 칸들
 	int height; //가로
