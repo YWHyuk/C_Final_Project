@@ -3,15 +3,15 @@
 #include <time.h>
 #include <stdlib.h>
 /*
- * ½ÇÁ¦ ¸ğ¾çÀ» È¸Àü½ÃÅ°´Â °ÍÀÌ ¾Æ´Ï¶ó,
- * º¸´Â ¹æÇâ¸¸ ¹Ù²Û´Ù.
+ * ì‹¤ì œ ëª¨ì–‘ì„ íšŒì „ì‹œí‚¤ëŠ” ê²ƒì´ ì•„ë‹ˆë¼,
+ * ë³´ëŠ” ë°©í–¥ë§Œ ë°”ê¾¼ë‹¤.
  *
  *            NORTH
- *              ¡é
- *          ¤±¤±¤±¤±¤±
- *  WEST ¡æ ¤±¤±¤±¤±¤± ¡ç EAST
- *          ¤±¤±  ¤±¤±  
- *              ¡è
+ *              â†“
+ *          ã…ã…ã…ã…ã…
+ *  WEST â†’ ã…ã…ã…ã…ã… â† EAST
+ *          ã…ã…  ã…ã…  
+ *              â†‘
  *            SOUTH(Default)
  *
  */
@@ -41,26 +41,26 @@ typedef struct shape {
 	unsigned int height;
 	Direction direction;
 	Cell* map;
-}Shape; // ¸ğ¾ç°ú Å©±â¸¦ Á¤ÀÇÇÔ ======== > ¾ç¿øÇõ
+}Shape; // ëª¨ì–‘ê³¼ í¬ê¸°ë¥¼ ì •ì˜í•¨ ======== > ì–‘ì›í˜
 
-/* ¹æÇâ¿¡ µû¸¥ ³ôÀÌ¸¦ ¸®ÅÏ */
+/* ë°©í–¥ì— ë”°ë¥¸ ë†’ì´ë¥¼ ë¦¬í„´ */
 unsigned int get_Height(Shape* shape);
-/* ¹æÇâ¿¡ µû¸¥ ³Êºñ¸¦ ¸®ÅÏ */
+/* ë°©í–¥ì— ë”°ë¥¸ ë„ˆë¹„ë¥¼ ë¦¬í„´ */
 unsigned int get_Width(Shape* shape);
 
 /*
- * ¹æÇâÀ» ±âÁØÀ¸·Î x,y ÁÂÇ¥ÀÇ ¼¿À» ¸®ÅÏ 
- * example) µ¥¸ğ ÄÚµå ÂüÁ¶ 
+ * ë°©í–¥ì„ ê¸°ì¤€ìœ¼ë¡œ x,y ì¢Œí‘œì˜ ì…€ì„ ë¦¬í„´ 
+ * example) ë°ëª¨ ì½”ë“œ ì°¸ì¡° 
  */
 Cell get_Cell(Shape* shape, unsigned int x, unsigned int y);
-/* ½Ã°è ¹æÇâÀ¸·Î È¸Àü */
+/* ì‹œê³„ ë°©í–¥ìœ¼ë¡œ íšŒì „ */
 void rotate_Clock(Shape* shape);
-/* ¹İ½Ã°è ¹æÇâÀ¸·Î È¸Àü */
+/* ë°˜ì‹œê³„ ë°©í–¥ìœ¼ë¡œ íšŒì „ */
 void rotate_CounterClock(Shape* shape);
 
-/* Shape »ı¼º */
-Shape * make_Shape(); //============ = > ¾ç¿øÇõ
-/* Shape Á¦°Å */
+/* Shape ìƒì„± */
+Shape * make_Shape(int row, int size); //============ = > ì–‘ì›í˜
+/* Shape ì œê±° */
 void delete_Shape(Shape* shape);
-/* µ¥¸ğ¿ë ÇÁ¸°Æ® */
+/* ë°ëª¨ìš© í”„ë¦°íŠ¸ */
 void print_Shape(Shape* shape);
