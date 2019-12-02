@@ -13,7 +13,6 @@ Shape* make_shape() {
 }
 int makeHeight(Building* b_addr) {
 	int height = 0;
-	int i = 0;
 	printf("층수를 입력하세요 : ");
 	scanf("%d", &height);
 	printf("====================================================== =\n");
