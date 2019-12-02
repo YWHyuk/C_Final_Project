@@ -69,6 +69,7 @@ void make_store(Player * player,int i) {
 	player->uncontracted_store[i] = new_store;
 }//프로토타입과 달리 make_store의 인자로 인덱스값을 추가했습니다.
 void refresh_store(Player * player) {
+	srand((unsigned)time(NULL));
 	int i = 0;
 
 	for (i = 0; i < SNUM; i++) {
