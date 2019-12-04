@@ -1,7 +1,8 @@
-#pragma once
+﻿#pragma once
 #include <stdio.h>
-#include <time.h>
 #include <stdlib.h>
+#include <time.h>
+
 /*
  * 실제 모양을 회전시키는 것이 아니라,
  * 보는 방향만 바꾼다.
@@ -24,10 +25,10 @@
 #define NEXIST	0
 #define EXIST	1
 
-typedef enum cell {
+typedef enum block {
 	nexist = NEXIST,
 	exist = EXIST
-}Cell;
+}Block;
 
 typedef enum direction {
 	north = NORTH,
@@ -40,7 +41,7 @@ typedef struct shape {
 	unsigned int width;
 	unsigned int height;
 	Direction direction;
-	Cell* map;
+	Block* map;
 }Shape; // 모양과 크기를 정의함 ======== > 양원혁
 
 /* 방향에 따른 높이를 리턴 */
@@ -52,7 +53,7 @@ unsigned int get_Width(Shape* shape);
  * 방향을 기준으로 x,y 좌표의 셀을 리턴 
  * example) 데모 코드 참조 
  */
-Cell get_Cell(Shape* shape, unsigned int x, unsigned int y);
+Block get_Block(Shape* shape, unsigned int x, unsigned int y);
 /* 시계 방향으로 회전 */
 void rotate_Clock(Shape* shape);
 /* 반시계 방향으로 회전 */

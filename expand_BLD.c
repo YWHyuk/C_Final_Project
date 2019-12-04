@@ -1,3 +1,10 @@
+#include "prototype.h"
+#ifndef STD
+#define STD
+#include <stdio.h>
+#include <stdlib.h>
+#endif
+
 void expand_BLD(Player* player, Building* b_addr) {
 	//층을 확장하고 그만큼의 돈을 player money에서 삭감 
 	int add_level,width;

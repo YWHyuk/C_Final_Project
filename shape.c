@@ -1,10 +1,10 @@
-#include "shape.h"
+﻿#include "shape.h"
 
-Cell get_Cell(Shape* shape, unsigned int x, unsigned int y) {
+Block get_Block(Shape* shape, unsigned int x, unsigned int y) {
 	unsigned int index;
 	/* 보는 관점에서 가로 세로를 검사 */
 	if (x >= get_Width(shape) || y >= get_Height(shape)) {
-		fprintf(stderr, "get cell index out!\n");
+		fprintf(stderr, "get Block index out!\n");
 		/* 예외 처리 */
 		return nexist;
 	}
@@ -41,7 +41,7 @@ void rotate_CounterClock(Shape* shape) {
 }
 Shape * make_Shape(int row, int size) {
 	Shape* shape;
-	Cell* map;
+	Block* map;
 	int tmp_index;
 	int tmp_x, tmp_y;
 	int width, height,rand_size;
@@ -52,7 +52,7 @@ Shape * make_Shape(int row, int size) {
 	rand_size = rand_size > 0 ? rand_size: size;
 
 	shape = (Shape*)malloc(sizeof(Shape));
-	map = (Cell*)malloc(sizeof(Cell)*(width*height));
+	map = (Block*)malloc(sizeof(Block)*(width*height));
 
 	shape->width = width;
 	shape->height = height;
@@ -105,8 +105,8 @@ void print_Shape(Shape* shape) {
 	int height = get_Height(shape);
 	int x, y;
 	for (x = 0; x < width; x++) {
-		for (int y = 0; y < height; y++) {
-			Cell tmp = get_Cell(shape, x, y);
+		for (y = 0; y < height; y++) {
+			Block tmp = get_Block(shape, x, y);
 			if (tmp == exist)
 				printf("■");
 			else
@@ -118,7 +118,7 @@ void print_Shape(Shape* shape) {
 
 /* for demo */
 int main() {
-	srand(time(NULL));
+	srand((time_t)time(NULL));
 	for (int i = 0; i < 100; i++) {
 		Shape* test = make_Shape(4,4);
 		print_Shape(test);
@@ -128,9 +128,9 @@ int main() {
 	getchar();
 }
 
-/* for demo */
+/* for demo 
 int main() {
-	srand(time(NULL));
+	srand((time_t)time(NULL));
 	Shape* test = make_Shape(4,4);
 	print_Shape(test);
 	getchar();
@@ -143,6 +143,5 @@ int main() {
 	rotate_Clock(test);
 	print_Shape(test);
 	getchar();
-
-
 }
+*/

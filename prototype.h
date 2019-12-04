@@ -1,15 +1,19 @@
-#pragma once
+﻿#pragma once
+#include "shape.h"
+#include <stdlib.h>
+#include <string.h>
+
 typedef struct player {
 	char* name;
-	Building* building; // 소유한 건물
-	Store* contracted_store; //임대된 가게 리스트
+	struct building* building; // 소유한 건물
+	struct store* contracted_store; //임대된 가게 리스트
 	int money; //건물주 재산
 	int tax; // 층의 수에 따른 세금
-	Store* uncontracted_store;//임대안된 가게 리스트
+	struct store* uncontracted_store;//임대안된 가게 리스트
 }Player;
 
 typedef struct cell{
-	Store* store;
+	struct store* store;
 	int valid; //공실유무
 }Cell;
 
@@ -23,7 +27,7 @@ typedef struct store {
 }Store;
 
 typedef struct building{
-	Floor* floor;
+	struct floor* floor;
 	int level; //층 수
 }Building;
 
@@ -32,12 +36,6 @@ typedef struct floor{
 	int height; //가로
 	int width; //세로
 }Floor;
-
-
-typedef struct shape{
-
-
-}Shape; // 모양과 크기를 정의함 ======== > 양원혁
 
 //========================================================================== =
 
@@ -55,7 +53,7 @@ void simulate(Player* player);//수익을 계산해서 show =============>김민
 
 void refresh_store(Player* player); // 가게들을 만들어 Player의 임대안된리스트에 넣음 =============> 김민혁
 
-void make_store(Player* player);// 가게 하나를 만들어 Player의 임대안된리스트에 넣음 =============>김민혁
+void make_store(Player * player, int i);// 가게 하나를 만들어 Player의 임대안된리스트에 넣음 =============>김민혁
 
 void init_BLD(Player* player); //건물만들기 =============> 
 
@@ -69,15 +67,13 @@ void select_difficulty();//부지선택으로 난이도 조절=============>조�
 
 void show_BLD(Building* building); //건물 전체 show=============>조재훈
 
-void show_floor(Building* building) //한 층만 show=============>조재훈
+void show_floor(Building* building); //한 층만 show=============>조재훈
 
 void store_info(Store* store); //가게 정보 show 파일 I.O 사용=============>조재훈
 
 
 
 //====================================================================== =
-
-Shape * make_shape(); //============ = > 양원혁
 
 void mapping(Building* building, Store* store); // 건물의 셀들에 세입자 포인터를 할당=============>이형일
 

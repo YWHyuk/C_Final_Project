@@ -1,3 +1,5 @@
+﻿#include "prototype.h"
+
 void Floor_state(Building ***b_addr,int x) {
 	int i = 0;
 	int j = 0;

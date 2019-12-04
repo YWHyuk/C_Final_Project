@@ -1,16 +1,8 @@
-#include<stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <malloc.h>
-#include"struct.h"
-#include<time.h>
+﻿#include "prototype.h"
+
 #define SNUM 10//가게개수
 #define TAX 10//층당 세금
 
-Shape* make_shape() {
-	Shape shape;
-	return &shape;
-}
 int makeHeight(Building* b_addr) {
 	int height = 0;
 	printf("층수를 입력하세요 : ");
@@ -43,21 +35,21 @@ void simulate(Player * player) {
 	int profit = 0; // 플레이어 이익
 	int num = 0; //가게수
 	int i = 0;
-	num = _msize(player->contracted_store) / sizeof(Store);
+	num = (int)_msize(player->contracted_store) / sizeof(Store);
 	for (i = 0; i < num; i++) {
 		player->contracted_store[i].money = player->contracted_store[i].income - player->contracted_store[i].rent;
 		//각 가게 자산 = 수익 - 임대료
 		//렌트비 못내면 어떻게 할지 구현
 		player->money += player->contracted_store[i].rent;//각 가게 임대료만큼 플레이어 자산 증가
 	}
-	player->money -= (player->building.level * TAX);//층*세금 만큼 플레이어 자산 감소
+	player->money -= (player->building->level * TAX);//층*세금 만큼 플레이어 자산 감소
 
 }//프로토타입과 달리 인자에서 Store*를 뺐습니다.
 
 void make_store(Player * player,int i) {
 	char name[10][10] = { "횟집","마트","고기집","주막","문구점","영화관","주차장","카페","백반집","세탁소" };
 	int income, rent, kind;
-	Shape *shape = make_shape();
+	Shape *shape = make_Shape(3,3);
 	kind = rand() % 10;
 	income = 300 + rand() % 100;
 	rent = 300+ rand() % 100; //300~400
@@ -84,7 +76,7 @@ void refresh_store(Player * player) {
 void init_BLD(Player* player) {
 	
 	
-	makeWidth(makeHeight(&(player->building)),&(player->building));
+	makeWidth(makeHeight(player->building),player->building);
 
 }
 Player* init_player() {
