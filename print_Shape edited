@@ -1,0 +1,17 @@
+void print_Shape(Player* player,Shape* shape,int xpos,int ypos) {
+	int width = get_Width(shape);
+	int height = get_Height(shape);
+	int x, y;
+	for (x = xpos; x < xpos+width; x++) {
+		for (int y = ypos; y < ypos+height; y++) {
+			Cell tmp = get_Cell(shape, x, y);
+			if (tmp == exist) {
+				printf("■");
+				(*(player->building) + x)->floor->cell[x + y]->rentrequest = 1;
+			}
+			else
+				printf("□");
+		}
+		printf("\n");
+	}
+}
