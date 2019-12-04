@@ -22,7 +22,7 @@ typedef struct store {
 	int id; // 가게 식별 번호
 }Store;
 
-typdef struct building{
+typedef struct building{
 	Floor* floor;
 	int level; //층 수
 }Building;
@@ -69,7 +69,7 @@ void select_difficulty();//부지선택으로 난이도 조절=============>조�
 
 void show_BLD(Building* building); //건물 전체 show=============>조재훈
 
-//void show_floor(Building* building) //한 층만 show => 보류=============>조재훈
+void show_floor(Building* building) //한 층만 show=============>조재훈
 
 void store_info(Store* store); //가게 정보 show 파일 I.O 사용=============>조재훈
 
