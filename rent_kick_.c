@@ -32,7 +32,7 @@ void rent(Player* player, Store* store,int x) {
 	int sizes = size * size;
 	int index = size;
 	store->shape = make_Shape(3, 3);
-
+        srand(time(NULL));
 	int a = rand() % size - 3;
 	if (a < 0)a = 0;
 	int b = rand() % size - 3;
