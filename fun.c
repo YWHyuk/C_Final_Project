@@ -66,6 +66,7 @@ void make_store(Player * player,int i) {
 	strcpy(new_store.name, name[kind]);
 	new_store.rent = rent;
 	new_store.income = income;
+	new_store.id = i+1;
 	player->uncontracted_store[i] = new_store;
 }//프로토타입과 달리 make_store의 인자로 인덱스값을 추가했습니다.
 void refresh_store(Player * player) {
