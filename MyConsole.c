@@ -21,23 +21,7 @@ void setCarrotSize(int x) {
 	SetConsoleCursorInfo(hcsb, &cursor_info);
 }
 void Background1(int x, int y) {
-	double temp[4];
-	double tt = x * x + y * y;
-	temp[3] = sqrt(tt);
-	temp[0] = temp[3] / 4;
-	temp[1] = temp[3] / 3;
-	temp[2] = temp[3] / 2;
-	for (int i = 0; i < x; i++) {
-		for (int j = 0; j < y; j++) {
-			double r = sqrt((x / 2 - i) * (x / 2 - i) + (y / 2 - j) * (y / 2 - j));
-			if (r < temp[0])
-				writeBlockWithColorXY(i, j, BACKGROUND_RED);
-			else if (r < temp[1])
-				writeBlockWithColorXY(i, j, BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED);
-			else
-				writeBlockWithColorXY(i, j, BACKGROUND_RED);
-		}
-	}
+	
 }
 
 /* 안의 4*4 박스를 제외하고 꾸민다. */
@@ -86,7 +70,7 @@ void writeCharWithColor(char* str, DWORD color) {
 	DWORD num;
 	DWORD len;
 	pos = getCursorCoord();
-	len = strlen(str);
+	len = (DWORD)strlen(str);
 	attr = malloc(sizeof(WORD) * len);
 	for (unsigned int i = 0; i < len; i++)
 		attr[i] = (WORD)color;
@@ -171,8 +155,8 @@ void drawTool(int x, int y) {
 	COORD pos;
 	WORD* attr;
 	DWORD num;
-	LPCTSTR temp = "←↑↓→ QWE";
-	DWORD len = strlen(temp);
+	char* temp = "←↑↓→ QWE";
+	DWORD len = (DWORD)strlen(temp);
 
 	pos = getCursorCoord();
 	attr = malloc(sizeof(WORD) * x * 2);
@@ -181,8 +165,13 @@ void drawTool(int x, int y) {
 
 	pos.X = x - (SHORT)len / 2;
 	pos.Y = (SHORT)y;
-	WriteConsoleOutputCharacter(hcsb, temp, len, pos, &num);
+	WriteConsoleOutputCharacter(hcsb, (LPCWSTR)temp, len, pos, &num);
 	pos.X = 0;
 	WriteConsoleOutputAttribute(hcsb, attr, x * 2, pos, &num);
 	free(attr);
+}
+void textcolor(int foreground, int background)
+{
+	int color = foreground + background * 16;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 }

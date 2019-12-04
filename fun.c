@@ -49,50 +49,52 @@ void simulate(Player * player) {
 void make_store(Player * player,int i) {
 	char name[10][10] = { "횟집","마트","고기집","주막","문구점","영화관","주차장","카페","백반집","세탁소" };
 	int income, rent, kind;
+	Store new_store;
 	Shape *shape = make_Shape(3,3);
+	
 	kind = rand() % 10;
 	income = 300 + rand() % 100;
 	rent = 300+ rand() % 100; //300~400
-	Store new_store;
+	
 	new_store.name = (char*)malloc(sizeof(char) * 10);
 	strcpy(new_store.name, name[kind]);
 	new_store.rent = rent;
 	new_store.income = income;
 	new_store.id = i+1;
+	new_store.money = 300 + rand() % 1000;
+	new_store.shape = shape;
+
+	if (player->uncontracted_store[i].shape != NULL)
+		delete_Shape(player->uncontracted_store[i].shape);
 	player->uncontracted_store[i] = new_store;
 }//프로토타입과 달리 make_store의 인자로 인덱스값을 추가했습니다.
+
 void refresh_store(Player * player) {
 	srand((unsigned)time(NULL));
 	int i = 0;
-
 	for (i = 0; i < SNUM; i++) {
-
 		make_store(player,i);
-
 	}
 }
 
 
 void init_BLD(Player* player) {
-	
-	
+	player->building = (Building*)malloc(sizeof(Building));
 	makeWidth(makeHeight(player->building),player->building);
-
 }
 Player* init_player() {
-	char name[10];
-	int money = 0;
-	printf("사용자의 이름을 입력해주세요 : ");
-	scanf("%s", name);
-	printf("초기자본을 입력해주세요 : ");
-	scanf("%d", &money);
-	
-	Player player;
-	player.uncontracted_store = (Store*)malloc(sizeof(Store) * SNUM);//10개 할당
-	player.contracted_store = (Store*)malloc(sizeof(Store) * SNUM);//10개 할당
-	player.name = (char*)malloc(sizeof(char) * 10);
-	strcpy(player.name, name);
-	player.money = money;
-	return &player;
+	Player* player;
 
+	player = (Player*)calloc(0, sizeof(Player));
+	player->name = (char*)malloc(sizeof(char) * 10);
+	
+	printf("사용자의 이름을 입력해주세요 : ");
+	scanf("%s", player->name);
+	printf("초기자본을 입력해주세요 : ");
+	scanf("%d", &(player->money));
+	
+	player->uncontracted_store = (Store*)calloc(1, sizeof(Store) * SNUM);//10개 할당
+	player->contracted_store = (Store*)calloc(1, sizeof(Store) * SNUM);//10개 할당
+	
+	return player;
 }

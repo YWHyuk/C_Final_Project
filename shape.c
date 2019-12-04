@@ -116,7 +116,7 @@ void print_Shape(Shape* shape) {
 	}
 }
 
-/* for demo */
+/* for demo 
 int main() {
 	srand((time_t)time(NULL));
 	for (int i = 0; i < 100; i++) {
@@ -127,6 +127,7 @@ int main() {
 	}
 	getchar();
 }
+*/
 
 /* for demo 
 int main() {

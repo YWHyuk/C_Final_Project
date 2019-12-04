@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "shape.h"
+#include "MyConsole.h"
 #include <stdlib.h>
 #include <string.h>
 
@@ -39,7 +40,7 @@ typedef struct floor{
 
 //========================================================================== =
 
-void rent_store(Player* player, Store* store); //사용자의 입력을 받아 입주시키기 =============>이형일
+void rent_store(Player* player, Store* store, int level); //사용자의 입력을 받아 입주시키기 =============>이형일
 
 void kick_store(Player* player, Store* store);//사용자의 입력을 받아 쫓아내기=============>이지훈
 
@@ -61,20 +62,20 @@ Player* init_player(); //============ = > 김민혁
 
 //========================================================================== =
 
-void select_difficulty();//부지선택으로 난이도 조절=============>조재훈
+int select_level(int x, int y);//부지선택으로 난이도 조절=============>조재훈
 
 //==========================================================================
 
-void show_BLD(Building* building); //건물 전체 show=============>조재훈
+void show_BLD(Building* b_addr); //건물 전체 show=============>조재훈
 
 void show_floor(Building* building); //한 층만 show=============>조재훈
 
 void store_info(Store* store); //가게 정보 show 파일 I.O 사용=============>조재훈
-
-
 
 //====================================================================== =
 
 void mapping(Building* building, Store* store); // 건물의 셀들에 세입자 포인터를 할당=============>이형일
 
 void unmapping(Building* building, Store* store); //============ = > 이지훈
+
+void scan_store(Store* store, int id);

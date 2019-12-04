@@ -9,6 +9,24 @@
 #define VK_R	0x52
 #define SIZE 75
 
+// color상수 지정 
+#define BLACK 0 
+#define BLUE 1 
+#define GREEN 2 
+#define CYAN 3 
+#define RED 4 
+#define MAGENTA 5 
+#define BROWN 6 
+#define LIGHTGRAY 7 
+#define DARKGRAY 8 
+#define LIGHTBLUE 9 
+#define LIGHTGREEN 10 
+#define LIGHTCYAN 11 
+#define LIGHTRED 12 
+#define LIGHTMAGENTA 13 
+#define YELLOW 14 
+#define WHITE 15 
+
 void setConsoleSize(int x, int y);
 void setCarrotSize(int x);
 void setFontSize(int size);
@@ -22,3 +40,4 @@ int KeyEventProc(KEY_EVENT_RECORD ker);
 KEY_EVENT_RECORD getVirtualKeyCode();
 COORD getCursorCoord();
 void setCursorVisibility(int i);
+void textcolor(int foreground, int background);
