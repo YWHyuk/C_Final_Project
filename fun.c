@@ -22,7 +22,7 @@ int makeWidth(int height, Building* b_addr) {
 		scanf("%d", &width);
 		(b_addr->floor+i)->cell = (Cell*)malloc(sizeof(Cell)*width*width);
 		printf("\t%d 층에  (%d,%d)칸을 생성했습니다.\n", i + 1, width,width);
-		memset((b_addr->floor)->cell, 0x0, sizeof(Cell)*width*width);
+		memset((b_addr->floor+i)->cell, 0x0, sizeof(Cell)*width*width);
 		(b_addr->floor+i)->width = width;
 	}
 	
