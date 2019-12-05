@@ -1,0 +1,25 @@
+void show_floor(Building* b_addr) {
+	
+	int floor_level = 1;
+	printf("층을 입력하세요 : ");
+	scanf("%d", &floor_level);
+
+	int width = (b_addr->floor + floor_level-1)->width;
+	int i;
+	int j;
+	int valid;
+
+	for (i = 0; i < width; i++) {
+		for (j = 0; j < width; j++) {
+
+			valid = (b_addr->floor + floor_level)->cell[(i*width) + j].valid;
+
+			if (valid == 1) {
+				printf("■");
+			}
+			else
+				printf("□");
+		}
+		printf("\n");
+	}
+}
