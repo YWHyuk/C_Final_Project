@@ -511,6 +511,7 @@ void clear_all() {
 	}
 }
 
+/*
 int main() {
 	setConsoleSize(50, 40);
 	
@@ -522,6 +523,7 @@ int main() {
 	show_ui();
 
 }
+*/
 
 void show_BLD(Building* b_addr) {
 	int i = 0;
