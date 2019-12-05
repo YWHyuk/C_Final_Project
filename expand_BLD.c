@@ -1,5 +1,3 @@
-#include "prototype.h"
-
 void expand_BLD(Player* player, Building* b_addr) {
 	//층을 확장하고 그만큼의 돈을 player money에서 삭감 
 	int add_level,width;
@@ -16,6 +14,7 @@ void expand_BLD(Player* player, Building* b_addr) {
 		scanf("%d", &width);
 		(b_addr->floor + (level + i))->cell = (Cell*)malloc(sizeof(Cell)*width*width);
 		printf("\t%d 층에  (%d,%d)칸을 생성했습니다.\n", (level)+i, width,width);
+		memset((b_addr->floor + (level+i))->cell, 0x0, sizeof(Cell)*width*width);
 		(b_addr-> floor+(level + i))->width = width;
 	}
 	b_addr->level += add_level;
