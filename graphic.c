@@ -5,24 +5,29 @@
 #include <stdlib.h>
 #include <math.h>
 
-int select_level (int x, int y) {
+#include "MyConsole.h"
+#include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
+#include <math.h>
+int select_level () {
 
 	KEY_EVENT_RECORD input;
 	int level = 4;
-	setCursorXY(x + 5, 3);
+	setCursorXY(70, 3);
 	printf("──────────────────");
-	setCursorXY(x + 8, 4);
+	setCursorXY(73, 4);
 	printf("난이도  설정");
-	setCursorXY(x + 5, 5);
+	setCursorXY(70, 5);
 	printf("──────────────────");
 
-	setCursorXY(x + 4, 9);
+	setCursorXY(69, 9);
 	printf("◀");
-	setCursorXY(x + 22, 9);
+	setCursorXY(87, 9);
 	printf("▶");
 	
 	do {
-		setCursorXY(x + 9, 9);
+		setCursorXY(74, 9);
 		printf("%d분위 지역", level);
 
 		switch (level) {
@@ -86,10 +91,10 @@ int select_level (int x, int y) {
 			setCursorXY(0, 28);
 			printf("                                                            \n");
 
-			setCursorXY(x - 7, 11);
-			printf("  강북구, 금천구, 노원구, 도봉구, 중랑구       \n");
+			setCursorXY(62, 11);
+			printf("강북구, 금천구, 노원구, 중랑구, ...\n");
 
-			setCursorXY(x + 3, 13);
+			setCursorXY(68, 13);
 			printf("      (쉬움 모드)      ");
 
 			break;
@@ -153,10 +158,10 @@ int select_level (int x, int y) {
 			setCursorXY(0, 28);
 			printf("                                                            \n");
 			
-			setCursorXY(x - 7, 11);
-			printf("강서구, 관악구, 구로구, 동대문구, 은평구, ...\n");
+			setCursorXY(62, 11);
+			printf("강서구, 관악구, 구로구, 은평구, ...\n");
 
-			setCursorXY(x + 3, 13);
+			setCursorXY(68, 13);
 			printf("      (보통 모드)      ");
 
 			break;
@@ -220,10 +225,10 @@ int select_level (int x, int y) {
 			setCursorXY(0, 28);
 			printf("                                                            \n");
 			
-			setCursorXY(x - 7, 11);
-			printf(" 강동구, 광진구, 동작구, 마포구, 종로구, ...   \n");
+			setCursorXY(62, 11);
+			printf("강동구, 광진구, 마포구, 종로구, ...\n");
 
-			setCursorXY(x + 3, 13);
+			setCursorXY(68, 13);
 			printf("     (어려움 모드)     ");
 
 			break;
@@ -287,11 +292,11 @@ int select_level (int x, int y) {
 			setCursorXY(0, 28);
 			printf("                                                            \n");
 
-			setCursorXY(x - 7, 11);
-			printf("      강남구, 서초구, 송파구, 용산구                \n");
+			setCursorXY(62, 11);
+			printf("  강남구, 서초구, 송파구, 용산구    \n");
 
-			setCursorXY(x + 3, 13);
-			printf("     (헬조선 모드)     ");
+			setCursorXY(70, 13);
+			printf("     (헬 모드)     ");
 
 			break;
 		default:
@@ -330,6 +335,197 @@ int select_level (int x, int y) {
 			break;
 		}
 	} while (1);
+}
+
+void show_ui_store_shape() {
+
+	int i, j;
+
+	for (i = 0; i < 10; i++) {
+
+		setCursorXY(66, 7 + i);
+
+		for (j = 0; j < 10; j++) {
+			printf("□");
+		}
+	}
+
+}
+void show_ui_store_info() {
+
+	setCursorXY(66, 19);
+	printf("가게이름 : 횟집");
+
+	setCursorXY(66, 20);
+	printf("임대료 :          원");
+
+	setCursorXY(66, 21);
+	printf("수익 :            원");
+
+	setCursorXY(66, 22);
+	printf("재산 :            원");
+}
+void show_ui_floor() {
+
+	int i, j;
+
+	for (i = 0; i < 20; i++) {
+
+		setCursorXY(10, 5 + i);
+
+		for (j = 0; j < 20; j++) {
+			printf("□");
+		}
+	}
+}
+void show_ui_floor_info() {// 층 선택
+
+
+	setCursorXY(25, 26);
+	printf("▲00층▼");
+
+}
+void show_ui_frame() {
+
+	int i;
+
+	setCursorXY(4, 2);
+	printf("┌─────────────────────────────────────────────────┬───────────────────────────────────────┐");
+
+	for (i = 3; i < 28; i++) {
+		setCursorXY(4, i);
+		printf("│");
+		setCursorXY(54, i);
+		printf("│");
+		setCursorXY(94, i);
+		printf("│");
+	}
+	setCursorXY(4, 28);
+	printf("├─────────────────────────────────────────────────┼───────────────────────────────────────┤");
+
+	for (i = 29; i < 37; i++) {
+		setCursorXY(4, i);
+		printf("│");
+		setCursorXY(54, i);
+		printf("│");
+		setCursorXY(94, i);
+		printf("│");
+	}
+
+	setCursorXY(4, 37);
+	printf("└─────────────────────────────────────────────────┴───────────────────────────────────────┘");
+
+
+	setCursorXY(26, 30);
+	printf("┌─────────────────────┐");
+	setCursorXY(26, 31);
+	printf("│");
+	setCursorXY(48, 31);
+	printf("│");
+	setCursorXY(26, 32);
+	printf("└─────────────────────┘");
+
+
+	setCursorXY(26, 33);
+	printf("┌─────────────────────┐");
+	setCursorXY(26, 34);
+	printf("│");
+	setCursorXY(48, 34);
+	printf("│");
+	setCursorXY(26, 35);
+	printf("└─────────────────────┘");
+
+
+	setCursorXY(60, 31);
+	printf("┌────────────────────────┐");
+	setCursorXY(60, 32);
+	printf("│");
+	setCursorXY(85, 32);
+	printf("│");
+	setCursorXY(60, 33);
+	printf("└────────────────────────┘");
+
+	setCursorXY(13, 30);
+	printf("┌───┐");
+	setCursorXY(13, 31);
+	printf("│   │");
+	setCursorXY(13, 32);
+	printf("└───┘");
+	setCursorXY(10, 33);
+	printf(" ┌───────┐");
+	setCursorXY(10, 34);
+	printf("┌┘       └┐");
+	setCursorXY(10, 35);
+	printf("└─────────┘");
+
+	/*
+	setCursorXY(14, 30);
+	printf("■■");
+	setCursorXY(14, 31);
+	printf("■■");
+
+	setCursorXY(12, 33);
+	printf("■■■■");
+	setCursorXY(10, 34);
+	printf("■■■■■■");
+	setCursorXY(10, 35);
+	printf("■■■■■■");
+	*/
+
+	setCursorXY(75, 4);
+	printf("▲");
+	setCursorXY(75, 25);
+	printf("▼");
+
+}
+void show_ui_user_info() {
+
+	setCursorXY(28, 31);
+	printf("이름 : user name");//추가
+
+	setCursorXY(28, 34);
+	printf("현재 건물층수 : 01층");//추가
+
+	setCursorXY(62, 32);
+	printf("현재 재산 : 123456789원");//추가
+
+	
+
+}
+
+void show_ui() {
+
+	show_ui_frame();
+	
+	show_ui_store_shape();
+	show_ui_store_info();
+
+	show_ui_floor();
+	show_ui_floor_info();
+	
+	show_ui_user_info();
+
+	setCursorXY(0, 37);
+}
+
+void clear_all() {
+	int i;
+	for (i = 0; i < 40; i++) {
+		setCursorXY(0, i);
+		printf("                                                                                                    ");
+	}
+}
+
+int main() {
+	setConsoleSize(50, 40);
+	
+	
+	select_level();
+
+	clear_all();
+
+	show_ui();
+
 }
 
 void show_BLD(Building* b_addr) {
