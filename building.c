@@ -1,35 +1,14 @@
 ﻿#include "prototype.h"
-
-int static makeHeight(Building* b_addr) {
-	int height = 0;
-	printf("층수를 입력하세요 : ");
-	scanf("%d", &height);
-	printf("====================================================== =\n");
-	b_addr->floor = (Floor*)malloc(sizeof(Floor)*height);
-	memset(b_addr->floor, 0x0, sizeof(Floor)*height);
-	b_addr->level = height;
-	return height;
-}
-
-int static makeWidth(int height, Building* b_addr) {
-	int i = 0;
-	int width = 0;
-	for (i = 0; i < height; i++) {
-		printf("%d층 크기 : ", i + 1);
-		scanf("%d", &width);
-		(b_addr->floor+i)->cell = (Cell*)malloc(sizeof(Cell)*width*width);
-		printf("\t%d 층에  (%d,%d)칸을 생성했습니다.\n", i + 1, width,width);
-		memset((b_addr->floor)->cell, 0x0, sizeof(Cell)*width*width);
-		(b_addr->floor+i)->width = width;
-	}
-	
-	printf("====================================================== =\n");
-	return width;
-}
-
+#define WIDTH 10
+#define SET_MONEY 2000//초기자본금
 void init_BLD(Player* player) {
-	player->building = (Building*)malloc(sizeof(Building));
-	makeWidth(makeHeight(player->building),player->building);
+	player->building.floor = (Floor*)malloc(sizeof(Floor));
+	memset(player->building.floor, 0x0, sizeof(Floor));
+	player->building.floor->cell = (Cell*)malloc(sizeof(Cell)*WIDTH*WIDTH);
+
+	memset(player->building.floor->cell, 0x0, sizeof(Cell)*WIDTH*WIDTH);
+	player->building.floor->width = WIDTH;
+	player->building.level = 1;	
 }
 
 void expand_BLD(Building* b_addr) {
@@ -56,14 +35,12 @@ void expand_BLD(Building* b_addr) {
 
 Player* init_player() {
 	Player* player;
-
+	srand((unsigned)time(NULL));	
 	player = (Player*)calloc(0, sizeof(Player));
 	player->name = (char*)malloc(sizeof(char) * 10);
-
+	player->money = SET_MONEY + rand()%1000;
 	printf("사용자의 이름을 입력해주세요 : ");
 	scanf("%s", player->name);
-	printf("초기자본을 입력해주세요 : ");
-	scanf("%d", &(player->money));
 
 	player->uncontracted_store = (Store*)calloc(1, sizeof(Store) * SNUM);//10개 할당
 	player->contracted_store = (Store*)calloc(1, sizeof(Store) * SNUM);//10개 할당
