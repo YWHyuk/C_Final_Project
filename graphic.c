@@ -5,11 +5,6 @@
 #include <stdlib.h>
 #include <math.h>
 
-#include "MyConsole.h"
-#include <stdio.h>
-#include <time.h>
-#include <stdlib.h>
-#include <math.h>
 int select_level () {
 
 	KEY_EVENT_RECORD input;
