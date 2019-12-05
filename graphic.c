@@ -1,8 +1,10 @@
 ﻿#include "MyConsole.h"
+#include "prototype.h"
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
 #include <math.h>
+
 int select_level (int x, int y) {
 
 	KEY_EVENT_RECORD input;
@@ -330,9 +332,74 @@ int select_level (int x, int y) {
 	} while (1);
 }
 
-/*int main() {
-	int test;
+void show_BLD(Building* b_addr) {
+	int i = 0;
+	int j, k;
+	int height = b_addr->level;
+	int floorSize;
+	printf("-------------------------------------\n");
+	for (i = height; i > 0; i--) {
+		printf("%2d층\n", i);
 
-	test = select_level(SIZE,SIZE);
-	printf("%d", test);
-}*/
+		floorSize = b_addr->floor[i - 1].width;
+
+		for (j = 0; j < floorSize; j++) {
+			for (k = 0; k < floorSize; k++)
+				printf("■");
+			printf("\n");
+		}
+	}
+}
+
+void scan_store(Store* store, int id) {
+	printf("%s      %d      %d      %d      %d\n", \
+		store[id - 1].name, store[id - 1].money, store[id - 1].rent, store[id - 1].income, store[id - 1].id);
+}//가게 정보를 불러온다.
+
+void show_floor(Player* player, Store* store, int level) {
+	int i, j;
+	Floor* dest_floor = player->building->floor + level;
+	int size = dest_floor->width;
+
+	for (i = 0; i < size; i++) {
+		for (j = 0; j < size; j++) {
+			if (dest_floor->cell[i + j].valid == 1)
+				printf("●");
+			else
+				printf("○");
+		}
+		printf("\n");
+	}
+}
+void print_Rentprocess(Cell* cell, Shape* shape) {
+	int width = get_Width(shape);
+	int height = get_Height(shape);
+	int x, y;
+	for (x = 0; x < width; x++) {
+		for (y = 0; y < height; y++) {
+			Block tmp = get_Block(shape, x, y);
+			if (tmp == exist && cell[x*width + y].valid == 1) {
+				/* 겹치는 칸 */
+				textcolor(RED, BLACK);
+				printf("■");
+			}
+			else if (tmp != exist && cell[x*width + y].valid == 1) {
+				/* 기존의 상점만 차지하는 칸 */
+				textcolor(GREEN, BLACK);
+				printf("■");
+			}
+			else if (tmp == exist && cell[x*width + y].valid != 1) {
+				/* 새로운 상점만 차지하는 칸 */
+				textcolor(BLUE, BLACK);
+				printf("■");
+			}
+			else {
+				/* 비어있는 칸 */
+				textcolor(WHITE, BLACK);
+				printf("□");
+			}
+		}
+		textcolor(WHITE, BLACK);
+		printf("\n");
+	}
+}

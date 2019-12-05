@@ -11,7 +11,7 @@ int main() {
 	refresh_store(player);
 	for(int i=0;i<10;i++)
 		scan_store(player->uncontracted_store,i+1);
-	rent_store(player, player->uncontracted_store, 0);
-	rent_store(player, player->uncontracted_store+1, 0);
-	system("pause");	
+	rent_store(player, player->uncontracted_store);
+	rent_store(player, player->uncontracted_store+1);
+	system("pause");
 }

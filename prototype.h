@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include "graphic.h"
 #include "shape.h"
 #include "MyConsole.h"
 #include <stdlib.h>
@@ -38,13 +39,18 @@ typedef struct floor{
 	int width; //세로
 }Floor;
 
+
+#define SNUM 10//가게개수
+#define TAX 10//층당 세금
+
+
 //========================================================================== =
 
-void rent_store(Player* player, Store* store, int level); //사용자의 입력을 받아 입주시키기 =============>이형일
+void rent_store(Player* player, Store* store); //사용자의 입력을 받아 입주시키기 =============>이형일
 
-void kick_store(Player* player, Store* store);//사용자의 입력을 받아 쫓아내기=============>이지훈
+void kick_store(Building* b_addr);//사용자의 입력을 받아 쫓아내기=============>이지훈
 
-void expand_BLD(Player* player, Building* building);//건물확장     =============> 이지훈
+void expand_BLD(Building* b_addr);//건물확장     =============> 이지훈
 
 //========================================================================== =
 
@@ -54,12 +60,11 @@ void simulate(Player* player);//수익을 계산해서 show =============>김민
 
 void refresh_store(Player* player); // 가게들을 만들어 Player의 임대안된리스트에 넣음 =============> 김민혁
 
-void make_store(Player * player, int i);// 가게 하나를 만들어 Player의 임대안된리스트에 넣음 =============>김민혁
-
 void init_BLD(Player* player); //건물만들기 =============> 
 
 Player* init_player(); //============ = > 김민혁
 
+/*
 //========================================================================== =
 
 int select_level(int x, int y);//부지선택으로 난이도 조절=============>조재훈
@@ -68,14 +73,10 @@ int select_level(int x, int y);//부지선택으로 난이도 조절============
 
 void show_BLD(Building* b_addr); //건물 전체 show=============>조재훈
 
-void show_floor(Building* building); //한 층만 show=============>조재훈
+void show_floor(Player* player, Store* store, int level); //한 층만 show=============>조재훈
 
 void store_info(Store* store); //가게 정보 show 파일 I.O 사용=============>조재훈
 
-//====================================================================== =
-
-void mapping(Building* building, Store* store); // 건물의 셀들에 세입자 포인터를 할당=============>이형일
-
-void unmapping(Building* building, Store* store); //============ = > 이지훈
-
 void scan_store(Store* store, int id);
+
+*/
