@@ -1,28 +1,15 @@
-/*store구조체에 shape이 초기화가 단순하지 않아 메인 진행시 주석처리 하고 진행하였습니다.*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "prototype.h"
-
-typedef struct Node //노드 개별을 의미
-{
-	Store* store;
-	struct Node* before;
-	struct Node* after;
-}Node;
-
-typedef struct list //리스트 
-{
-	Node* head;
-	Node* tail;
-}List;
+#include <windows.h>
+#include <conio.h>
 
 void list_init(List* target)
 {
 	target->head = NULL;
 	target->tail = NULL;
 }
-
 void add_first(List* target, Store* store) //tail은 고정 head는 계속 새로운 노드로 갱신 
 {
 	Node* newNode = (Node*)malloc(sizeof(Node));
@@ -126,7 +113,7 @@ void check(int bool) {
 	}
 }
 
-void find(List* target, int level) //한 층에 모든 입주 가게 보여줄 경우 있을때 쓸만한거같아서 남겨뒀습니다
+void find(List* target, int level) 
 {
 
 	Node* cur = target->head;
@@ -244,7 +231,7 @@ int main() {
 	list_init(&list);
 
 	Store store1 = { "세탁소", 100, 50, 400 ,1, 2 };
-	Store store2 = { "주차장", 100 ,50, 400, 2, 1 }; //Store store2 = { "주차장", 100 ,50, 400, 2, 2 };
+	Store store2 = { "주차장", 100 ,50, 400, 2, 1 }; //Store store2 = { "주차장", 100 ,50, 400, 2, 2 }; //한 개씩 볼때 예외처리 되었는지 확인
 	Store store3 = { "이발소", 100, 50, 400, 3, 2 };
 	Store store4 = { "피시방", 100, 50, 400, 4, 1 }; //Store store4 = { "피시방", 100, 50, 400, 4, 2 };
 	Store store5 = { "백반집", 100, 50, 400, 5, 2 };
@@ -263,7 +250,8 @@ int main() {
 	find(&list, 2);
 	printf("\n");
 	rfind(&list,2);
-*/
+    */
+
 	/*find(&list, 2);
 	printf("\n");
 	rfind(&list, 2);*/
