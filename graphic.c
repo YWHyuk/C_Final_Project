@@ -352,19 +352,19 @@ void show_ui_store_shape() {
 	}
 
 }
-void show_ui_store_info() {
+void show_ui_store_info(Store* store) {
 
 	setCursorXY(66, 19);
-	printf("가게이름 : 횟집");
+	printf("가게이름 : %9s",store->name);
 
 	setCursorXY(66, 20);
-	printf("임대료 :          원");
+	printf("임대료 : %9d원",store->rent);
 
 	setCursorXY(66, 21);
-	printf("수익 :            원");
+	printf("수익   : %9d원",store->income);
 
 	setCursorXY(66, 22);
-	printf("재산 :            원");
+	printf("재산   : %9d원",store->money);
 }
 void show_ui_floor() {
 
@@ -379,11 +379,11 @@ void show_ui_floor() {
 		}
 	}
 }
-void show_ui_floor_info() {// 층 선택
+void show_ui_floor_info(int level) {// 층 선택
 
 
 	setCursorXY(25, 26);
-	printf("▲00층▼");
+	printf("◀%03d층▶",level);
 
 }
 void show_ui_frame() {
@@ -480,33 +480,32 @@ void show_ui_frame() {
 
 }
 void show_ui_user_info(Player* player) {
-
+	
 	setCursorXY(28, 31);
 	printf("이름 : %10s",player->name);//추가
 
 	setCursorXY(28, 34);
-	printf("전체 건물층수 : %04d층",player->building->level);//추가
+	printf("전체 건물층수 :%03d층",player->building->level);//추가
 
 	setCursorXY(62, 32);
 	printf("현재 재산 : %8d원",player->money);//추가
-
-	
-
 }
 
 void show_ui(Player* player) {
+	int level = 1;
+
 	setConsoleSize(50, 40);
 	setFontSize(12);
 
 	show_ui_frame();
 	
 	show_ui_store_shape();
-	show_ui_store_info();
+	show_ui_store_info(player->uncontracted_store); /* for test change with linked list */
 
 	show_ui_floor();
-	show_ui_floor_info();
+	show_ui_floor_info(level);
 	
-	show_ui_user_info();
+	show_ui_user_info(player);
 
 	setCursorXY(0, 37);
 }

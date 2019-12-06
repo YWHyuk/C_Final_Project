@@ -2,21 +2,15 @@
 #include "graphic.h"
 int main() {
 	int level = select_level();
-	Player* player = init_player();
+	Player* player = init_player(level);
 	init_BLD(player);
 
 	introduction(player);
+	refresh_store(player);
 
 	clear_all();
 	show_ui(player);
 
-	//expand_BLD(player, player->building);
-	//show_BLD(player->building);
-	//refresh_store(player);
-	//for(int i=0;i<10;i++)
-		//scan_store(player->uncontracted_store,i+1);
-	//rent_store(player, player->uncontracted_store);
-	//rent_store(player, player->uncontracted_store+1);
 	delete_BLD(player);
  	delete_player(player);
 	system("pause");

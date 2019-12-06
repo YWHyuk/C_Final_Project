@@ -10,6 +10,7 @@ typedef struct player {
 	struct store* contracted_store; //임대된 가게 리스트
 	int money; //건물주 재산
 	int tax; // 층의 수에 따른 세금
+	int reroll;
 	struct store* uncontracted_store;//임대안된 가게 리스트
 }Player;
 
@@ -26,6 +27,7 @@ typedef struct store {
 	Shape* shape;//모양 포인터
 	int id; // 가게 식별 번호
 	int level; // 가게 층 수
+	int reroll;
 }Store;
 
 typedef struct building{
@@ -61,7 +63,7 @@ void refresh_store(Player* player); // 가게들을 만들어 Player의 임대�
 
 void init_BLD(Player* player); //건물만들기 =============> 
 
-Player* init_player(); //============ = > 김민혁
+Player* init_player(int difficulty); //============ = > 김민혁
 
 void delete_BLD(Player* player);
 

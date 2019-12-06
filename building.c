@@ -36,7 +36,7 @@ void expand_BLD(Building* b_addr) {
 	printf("=======================================================\n");
 }
 
-Player* init_player() {
+Player* init_player(int difficulty) {
 	Player* player;
 	srand((unsigned)time(NULL));	
 	player = (Player*)calloc(1, sizeof(Player));
@@ -44,6 +44,9 @@ Player* init_player() {
 
 	player->uncontracted_store = (Store*)calloc(1, sizeof(Store) * SNUM);//10개 할당
 	player->contracted_store = (Store*)calloc(1, sizeof(Store) * SNUM);//10개 할당
+
+	player->money = (rand() % 1000) + 9000 * difficulty;
+	player->tax = 300 * (5-difficulty);
 
 	return player;
 }
