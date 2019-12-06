@@ -63,19 +63,6 @@ void init_BLD(Player* player); //건물만들기 =============>
 
 Player* init_player(); //============ = > 김민혁
 
-/*
-//========================================================================== =
+void delete_BLD(Player* player);
 
-int select_level(int x, int y);//부지선택으로 난이도 조절=============>조재훈
-
-//==========================================================================
-
-void show_BLD(Building* b_addr); //건물 전체 show=============>조재훈
-
-void show_floor(Player* player, Store* store, int level); //한 층만 show=============>조재훈
-
-void store_info(Store* store); //가게 정보 show 파일 I.O 사용=============>조재훈
-
-void scan_store(Store* store, int id);
-
-*/
+void delete_player(Player* player);

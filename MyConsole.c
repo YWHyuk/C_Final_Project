@@ -7,8 +7,12 @@ void setConsoleSize(int x, int y) {
 	tt.cbSize = sizeof(tt);
 	GetConsoleScreenBufferInfoEx(hcsb, &tt);
 	tt.dwSize.X = 2 * x; // 2 * x
-	tt.dwSize.Y = y + 1;
-	tt.srWindow.Bottom = y + 1; // y + menu
+	tt.dwSize.Y = y ;
+
+	tt.srWindow.Top = 0;
+	tt.srWindow.Left = 0;
+	tt.srWindow.Bottom = y; // y + menu
+	tt.srWindow.Right = 2 * x;
 	SetConsoleScreenBufferInfoEx(hcsb, &tt);
 }
 

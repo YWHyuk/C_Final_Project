@@ -11,6 +11,10 @@ int select_level () {
 
 	KEY_EVENT_RECORD input;
 	int level = 4;
+	
+	setConsoleSize(50, 40);
+	setFontSize(12);
+
 	setCursorXY(70, 3);
 	printf("──────────────────");
 	setCursorXY(73, 4);
@@ -491,6 +495,8 @@ void show_ui_user_info() {
 }
 
 void show_ui() {
+	setConsoleSize(50, 40);
+	setFontSize(12);
 
 	show_ui_frame();
 	
@@ -511,21 +517,8 @@ void clear_all() {
 		setCursorXY(0, i);
 		printf("                                                                                                    ");
 	}
+	setCursorXY(0, 0);
 }
-
-/*
-int main() {
-	setConsoleSize(50, 40);
-	
-	
-	select_level();
-
-	clear_all();
-
-	show_ui();
-
-}
-*/
 
 void show_BLD(Building* b_addr) {
 	int i = 0;
@@ -604,8 +597,30 @@ void slow_printf(char *str) {
 	COORD temp = getCursorCoord();
 	setCursorXY(CONSOLE_X - sz/2,temp.Y);
 	for (i = 0ul; i < sz; i++) {
-		printf("%c", str[i]);
-		Sleep(100);
+		if ((str[i] & 0x80) == 0x80) {
+			printf("%c%c", str[i], str[i + 1]); //한글이면 2byte 출력
+			i++;
+		}
+		else
+			printf("%c",str[i]) ; //아니면 그냥 출력
+		Sleep(50);
 	}
-	getchar();
+	return;
+}
+
+void introduction(Player* player) {
+	char buffer[1024];
+	
+	clear_all();
+	setCursorXY(0, CONSOLE_Y / 2 - 1);
+	slow_printf("당신의 이름은? ");
+	scanf("%s", player->name);
+	sprintf(buffer, "2009년 %s는 과제를 하던 도중\n", player->name);
+	slow_printf(buffer);
+	slow_printf("우연히 비트코인을 알게 되었다.\n");
+
+	slow_printf("재미삼아 비트코인을 구매하게 되었고...\n\n");
+	slow_printf("10년이 지난후 지금, 비트코인을 구매하게 된 사실을 떠올렸다.\n");
+	sprintf(buffer, "%s는 불어난 돈으로 작은 건물을 구매하였다.\n", player->name);
+	slow_printf(buffer);
 }
