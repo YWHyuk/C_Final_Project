@@ -1,3 +1,4 @@
+/*테스트를 해보기위해 임의로 스토어를 초기화할때 shape의 초기화는 쉽지 않아 store구조체에서 shape는 주석처리하고 진행하였습니다*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -230,6 +231,7 @@ int main() {
 
 	list_init(&list);
 
+/*테스트를 해보기위해 임의로 스토어를 초기화할때 shape의 초기화는 쉽지 않아 store구조체에서 shape는 주석처리하고 진행하였습니다*/
 	Store store1 = { "세탁소", 100, 50, 400 ,1, 2 };
 	Store store2 = { "주차장", 100 ,50, 400, 2, 1 }; //Store store2 = { "주차장", 100 ,50, 400, 2, 2 }; //한 개씩 볼때 예외처리 되었는지 확인
 	Store store3 = { "이발소", 100, 50, 400, 3, 2 };
