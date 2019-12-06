@@ -12,7 +12,6 @@ typedef struct player {
 	int tax; // 층의 수에 따른 세금
 	int reroll;
 	struct store* uncontracted_store;//임대안된 가게 리스트
-	int reroll;
 }Player;
 
 typedef struct cell{
