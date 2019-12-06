@@ -127,7 +127,7 @@ void check(int bool) {
 	}
 }
 
-void find(List* target, int level) 
+void find(List* target, int level) //한 층에 모든 입주 가게 보여줄 경우 있을때 쓸만한거같아서 남겨뒀습니다
 {
 
 	Node* cur = target->head;
@@ -177,6 +177,67 @@ void rfind(List* target, int level)
 	}
 }
 
+void findOne(List* target, int level) { //방향키 한번 누를때마다 한개씩 보여주는 함수
+	int ch; 
+	int input = 77; //오른쪽 방향키 아스키코드
+
+	Node* cur = target->head;
+
+	while (1) {
+		if (target->head == NULL)
+		{
+			printf("가게가 존재하지 않습니다\n");
+		}
+		else {
+			if (_kbhit()) {
+				ch = _getch();
+				if (ch == input) {
+					if (cur->store->level == level) {
+						system("cls");
+						printf("가게이름: %s \n    수입: %d\n  임대료: %d\n    재산: %d\n", cur->store->name, cur->store->income, cur->store->rent, cur->store->money);
+						cur = cur->after;
+					}
+					while (cur->store->level != level) {
+						cur =cur->after;
+					}
+					continue;
+				}
+			}
+		}
+	}
+}
+
+void rfindOne(List* target, int level) { //방향키 한번 누를때마다 한개씩 보여주는 함수
+	int ch;
+	int input = 75; //왼쪽 방향키 아스키코드
+
+	Node* cur = target->tail;
+
+	while (1) {
+		if (target->head == NULL)
+		{
+			printf("가게가 존재하지 않습니다\n");
+		}
+		else {
+			if (_kbhit()) {
+				ch = _getch();
+				if (ch == input) {
+					if (cur->store->level == level) {
+						system("cls");
+						printf("가게이름: %s \n    수입: %d\n  임대료: %d\n    재산: %d\n", cur->store->name, cur->store->income, cur->store->rent, cur->store->money);
+						cur = cur->before;
+					}
+					while (cur->store->level != level) {
+						cur = cur->before;
+					}
+					continue;
+				}
+			}
+		}
+	}
+}
+
+
 int main() {
 	
 	List list;
@@ -184,9 +245,9 @@ int main() {
 	list_init(&list);
 
 	Store store1 = { "세탁소", 100, 50, 400 ,1, 2 };
-	Store store2 = { "주차장", 100 ,50, 400, 2, 2 };
+	Store store2 = { "주차장", 100 ,50, 400, 2, 1 }; //Store store2 = { "주차장", 100 ,50, 400, 2, 2 };
 	Store store3 = { "이발소", 100, 50, 400, 3, 2 };
-	Store store4 = { "피시방", 100, 50, 400, 4, 2 };
+	Store store4 = { "피시방", 100, 50, 400, 4, 1 }; //Store store4 = { "피시방", 100, 50, 400, 4, 2 };
 	Store store5 = { "백반집", 100, 50, 400, 5, 2 };
 
 	push_back(&list, &store1);
@@ -196,15 +257,20 @@ int main() {
 	push_back(&list, &store5);
 
 
-	find(&list, 2);
+	/*find(&list, 2);
 	printf("\n");
 	check(delete(&list, 5));
 	printf("\n");
 	find(&list, 2);
 	printf("\n");
 	rfind(&list,2);
-
+*/
 	/*find(&list, 2);
 	printf("\n");
 	rfind(&list, 2);*/
+
+
+	
+	/*findOne(&list, 2)*/
+	rfindOne(&list, 2);
 }
