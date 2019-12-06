@@ -77,26 +77,27 @@ void delete(List* target, int id)
 	{
 		printf("가게가 존재하지 않습니다\n");
 	}
+	else {
+		//head를 지울 때
 
-	//head를 지울 때
+		//tail를 지울 때 등의 예외..
 
-	//tail를 지울 때 등의 예외..
-	
-	while (cur ->after != target->head) {
-		if (id == cur->store->id) {
-			if (cur = target->tail) {
-				cur->before = target->tail;
+		while (cur->after != target->head) {
+			if (id == cur->store->id) {
+				if (cur = target->tail) {
+					cur->before = target->tail;
+				}
+				if (cur = target->head) {
+					cur->after = target->head;
+				}
+				temp = cur;
 			}
-			if (cur = target->head) {
-				cur->after = target->head;
-			}
-			temp = cur;
+			cur = cur->after;
 		}
-		cur = cur->after;
+		cur->before->after = cur->after;
+		cur->after->before = cur->before;
+		free(cur);
 	}
-	cur->before->after = cur->after;
-	cur->after->before = cur->before;
-	free(cur);
 }
 */
 
@@ -104,35 +105,49 @@ void find(List* target, int level)
 {
 
 	Node* cur = target->head;
-	
-	if (cur->store->level == level) {
-		printf("가게이름: %s \n 가게 수입: %d\n 가게 임대료: %d\n 가게 재산: %d\n", cur->store->name, cur->store->income, cur->store->rent, cur->store->money);
-	}
-	cur = cur->after;
-	while (cur != target->head)
+
+	if (target->head == NULL)
 	{
+		printf("가게가 존재하지 않습니다\n");
+	}
+	else {
+
 		if (cur->store->level == level) {
 			printf("가게이름: %s \n 가게 수입: %d\n 가게 임대료: %d\n 가게 재산: %d\n", cur->store->name, cur->store->income, cur->store->rent, cur->store->money);
 		}
 		cur = cur->after;
+		while (cur != target->head)
+		{
+			if (cur->store->level == level) {
+				printf("가게이름: %s \n 가게 수입: %d\n 가게 임대료: %d\n 가게 재산: %d\n", cur->store->name, cur->store->income, cur->store->rent, cur->store->money);
+			}
+			cur = cur->after;
+		}
 	}
 }
 
-void rfind(List* target, int level)
+void rfind(List* target, int level) //
 {
 	Node* cur = target->tail;
 
-	if(cur->store->level == level)
-		if (cur->store->level == level) {
-			printf("가게이름: %s \n 가게 수입: %d\n 가게 임대료: %d\n 가게 재산: %d\n", cur->store->name, cur->store->income, cur->store->rent, cur->store->money);
-		}
-	cur = cur->before;
-	while (cur != target->tail)
+	if (target->head == NULL)
 	{
-		if (cur->store->level == level) {
-			printf("가게이름: %s \n 가게 수입: %d\n 가게 임대료: %d\n 가게 재산: %d\n", cur->store->name, cur->store->income, cur->store->rent, cur->store->money);
-		}
+		printf("가게가 존재하지 않습니다\n");
+	}
+	else {
+
+		if (cur->store->level == level)
+			if (cur->store->level == level) {
+				printf("가게이름: %s \n 가게 수입: %d\n 가게 임대료: %d\n 가게 재산: %d\n", cur->store->name, cur->store->income, cur->store->rent, cur->store->money);
+			}
 		cur = cur->before;
+		while (cur != target->tail)
+		{
+			if (cur->store->level == level) {
+				printf("가게이름: %s \n 가게 수입: %d\n 가게 임대료: %d\n 가게 재산: %d\n", cur->store->name, cur->store->income, cur->store->rent, cur->store->money);
+			}
+			cur = cur->before;
+		}
 	}
 }
 
