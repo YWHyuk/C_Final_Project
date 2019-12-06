@@ -3,14 +3,13 @@
 int main() {
 	int level = select_level();
 	Player* player = init_player();
-	
+	init_BLD(player);
+
 	introduction(player);
 
 	clear_all();
-	show_ui();
+	show_ui(player);
 
-	init_BLD(player);
-	//show_BLD(player->building);
 	//expand_BLD(player, player->building);
 	//show_BLD(player->building);
 	//refresh_store(player);

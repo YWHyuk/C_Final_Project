@@ -479,22 +479,22 @@ void show_ui_frame() {
 	printf("▼");
 
 }
-void show_ui_user_info() {
+void show_ui_user_info(Player* player) {
 
 	setCursorXY(28, 31);
-	printf("이름 : user name");//추가
+	printf("이름 : %10s",player->name);//추가
 
 	setCursorXY(28, 34);
-	printf("현재 건물층수 : 01층");//추가
+	printf("전체 건물층수 : %04d층",player->building->level);//추가
 
 	setCursorXY(62, 32);
-	printf("현재 재산 : 123456789원");//추가
+	printf("현재 재산 : %8d원",player->money);//추가
 
 	
 
 }
 
-void show_ui() {
+void show_ui(Player* player) {
 	setConsoleSize(50, 40);
 	setFontSize(12);
 
