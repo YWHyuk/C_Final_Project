@@ -1,0 +1,164 @@
+/* delete의 예외처리가 잘 안되어 추가적으로 내일 올리도록 하겠습니다.
+   delete 예외처리 하면서 find rfind 함수도 한번 실행마다 한개씩만 보이도록 수정하겠습니다.*/
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "prototype.h"
+
+typedef struct Node //노드 개별을 의미
+{
+	Store* store;
+	struct Node* before;
+	struct Node* after;
+}Node;
+
+typedef struct list //리스트 
+{
+	Node* head;
+	Node* tail;
+}List;
+
+void list_init(List* target)
+{
+	target->head = NULL;
+	target->tail = NULL;
+}
+void add_first(List* target, Store* store)
+{
+	Node* newNode = (Node*)malloc(sizeof(Node));
+	newNode->store = store;
+
+	if (target->head == NULL) { //노드가 비어있음
+		target->tail = newNode;
+		target->tail->after = newNode;
+		target->tail->before = newNode;
+		newNode->after = target->tail;
+		newNode->before = target->tail;
+		target->head = newNode;
+		return;
+	}
+	
+	if (target->head != NULL)
+	{
+		newNode->before = target->head->before;
+		target->tail->after = newNode;
+		newNode->after = target->head;
+		target->head->before = newNode;
+		target->head = newNode;
+		return;
+	}
+}
+/*void push_back(List* target, Store* store)
+{
+	Node* newNode = (Node*)malloc(sizeof(Node));
+	Node* cur = target->tail;
+
+	if (target->head == NULL)
+	{
+		add_first(target, store);
+		return;
+	}
+	newNode->after = target->tail->after;
+	newNode->before = target->head->before;
+	target->head->before = newNode;
+	target->tail->after = newNode;
+	newNode->store = store;
+}*/
+
+/*
+//먼저 add를 해주고 난 다음에 실행해야 함
+void delete(List* target, int id)
+{
+	Node* temp = NULL;
+	Node* cur = target->head;
+
+	//노드가 존재하지 않을 때
+	if (target->head == NULL)
+	{
+		printf("가게가 존재하지 않습니다\n");
+	}
+
+	//head를 지울 때
+
+	//tail를 지울 때 등의 예외..
+	
+	while (cur ->after != target->head) {
+		if (id == cur->store->id) {
+			if (cur = target->tail) {
+				cur->before = target->tail;
+			}
+			if (cur = target->head) {
+				cur->after = target->head;
+			}
+			temp = cur;
+		}
+		cur = cur->after;
+	}
+	cur->before->after = cur->after;
+	cur->after->before = cur->before;
+	free(cur);
+}
+*/
+
+void rfind(List* target, int level) 
+{
+
+	Node* cur = target->head;
+	
+	if (cur->store->level == level) {
+		printf("가게이름: %s \n 가게 수입: %d\n 가게 임대료: %d\n 가게 재산: %d\n", cur->store->name, cur->store->income, cur->store->rent, cur->store->money);
+	}
+	cur = cur->after;
+	while (cur != target->head)
+	{
+		if (cur->store->level == level) {
+			printf("가게이름: %s \n 가게 수입: %d\n 가게 임대료: %d\n 가게 재산: %d\n", cur->store->name, cur->store->income, cur->store->rent, cur->store->money);
+		}
+		cur = cur->after;
+	}
+}
+
+void find(List* target, int level)
+{
+	Node* cur = target->tail;
+
+	if(cur->store->level == level)
+		if (cur->store->level == level) {
+			printf("가게이름: %s \n 가게 수입: %d\n 가게 임대료: %d\n 가게 재산: %d\n", cur->store->name, cur->store->income, cur->store->rent, cur->store->money);
+		}
+	cur = cur->before;
+	while (cur != target->tail)
+	{
+		if (cur->store->level == level) {
+			printf("가게이름: %s \n 가게 수입: %d\n 가게 임대료: %d\n 가게 재산: %d\n", cur->store->name, cur->store->income, cur->store->rent, cur->store->money);
+		}
+		cur = cur->before;
+	}
+}
+
+int main() {
+	
+	List list;
+
+	list_init(&list);
+
+	Store store1 = { "세탁소", 100, 50, 400 ,1, 2 };
+	Store store2 = { "주차장", 100 ,50, 400, 2, 2 };
+	Store store3 = { "이발소", 100, 50, 400, 3, 2 };
+	Store store4 = { "피시방", 100, 50, 400, 4, 2 };
+	Store store5 = { "백반집", 100, 50, 400, 5, 2 };
+
+	add_first(&list, &store1);
+	add_first(&list, &store2);
+	add_first(&list, &store3);
+	add_first(&list, &store4);
+	add_first(&list, &store5);
+
+	find(&list, 2);
+	printf("\n");
+	//delete(&list, 1);
+	find(&list, 2);
+	printf("\n\n\n");
+	find(&list, 2);
+
+}
