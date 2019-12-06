@@ -155,3 +155,32 @@ void kick_store(Building* b_addr) {
 	else 
 		printf("해당 가게가 존재하지 않습니다\n");
 }
+
+
+void static enlarged_mapping(Cell* cell, Store* store) {
+	int width = get_Width(store->shape);
+	int height = get_Height(store->shape);
+	int x, y;
+	for (x = 0; x <2* width; x+2) {
+		for (y = 0; y <2* height; y+2) {
+			Block tmp = get_Block(store->shape, x, y);
+			if (tmp == exist) {
+				copy(cell, store, x, y, width, height);
+
+			}
+		}
+	}
+}
+//기존에 만들어진 맵핑에서 확대시키기
+
+void copy_data(Cell* cell, Store* store, int x, int y, int width,int height) {
+	int width = get_Width(store->shape);
+	int height = get_Height(store->shape);
+	int i, j;
+	for (i = 0; i < 2; i++) {
+		for (j = 0; j < 2; j++) {
+			cell[(x + i)*(width * 2) + (y + j)].valid = 1;
+			cell[(x + i)*(width * 2) + (y + j)].store = store;
+		}
+	}
+  //확대를 위한 데이터 복사
