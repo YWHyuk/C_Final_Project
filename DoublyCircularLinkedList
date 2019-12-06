@@ -1,5 +1,5 @@
-/* delete의 예외처리가 잘 안되어 추가적으로 내일 올리도록 하겠습니다.
-   delete 예외처리 하면서 find rfind 함수도 한번 실행마다 한개씩만 보이도록 수정하겠습니다.*/
+/*find rfind 함수도 한번 실행마다 한개씩만 보이도록 수정하겠습니다.*/
+/*store구조체에 shape이 초기화가 단순하지 않아 메인 진행시 주석처리 하고 진행하였습니다.*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -23,7 +23,8 @@ void list_init(List* target)
 	target->head = NULL;
 	target->tail = NULL;
 }
-void add_first(List* target, Store* store)
+
+void add_first(List* target, Store* store) //tail은 고정 head는 계속 새로운 노드로 갱신 
 {
 	Node* newNode = (Node*)malloc(sizeof(Node));
 	newNode->store = store;
@@ -48,6 +49,7 @@ void add_first(List* target, Store* store)
 		return;
 	}
 }
+
 void push_back(List* target, Store* store)
 {
 	Node* newNode = (Node*)malloc(sizeof(Node));
@@ -66,8 +68,7 @@ void push_back(List* target, Store* store)
 	newNode->store = store;
 }
 
-/*
-void delete(List* target, int id)
+int delete(List* target, int id)
 {
 	Node* temp = NULL;
 	Node* cur = target->head;
@@ -75,31 +76,56 @@ void delete(List* target, int id)
 	//노드가 존재하지 않을 때
 	if (target->head == NULL)
 	{
-		printf("가게가 존재하지 않습니다\n");
+		return -1;
 	}
 	else {
+
 		//head를 지울 때
-
-		//tail를 지울 때 등의 예외..
-
-		while (cur->after != target->head) {
-			if (id == cur->store->id) {
-				if (cur = target->tail) {
-					cur->before = target->tail;
-				}
-				if (cur = target->head) {
-					cur->after = target->head;
-				}
-				temp = cur;
-			}
-			cur = cur->after;
+		if (cur->store->id == id) {
+			target->head = target->head->after;
+			cur->before->after = cur->after;
+			cur->after->before = cur->before;
+			free(cur);
+			return 0;
 		}
-		cur->before->after = cur->after;
-		cur->after->before = cur->before;
-		free(cur);
+		else {
+			cur = cur->after;
+
+			while (cur != target->head) {
+				if (cur->store->id == id) {
+					//tail를 지울 때
+					if (cur == target->tail) {
+						target->tail = target->tail->before;
+						cur->before->after = cur->after;
+						cur->after->before = cur->before;
+						free(cur);
+						return 0;
+					}
+					cur->before->after = cur->after;
+					cur->after->before = cur->before;
+					free(cur);
+					return 0;
+				}
+				else {
+					cur = cur->after;
+				}
+			}
+			return 1;
+		}
 	}
 }
-*/
+
+void check(int bool) {
+	if (bool == 0) {
+		printf("가게와의 계약을 취소했습니다.\n");
+	}
+	else if(bool == -1) {
+		printf("해당 아이디를 가진 가게가 존재하지 않습니다\n");
+	}
+	else {
+		printf("해당 아이디를 가진 가게가 존재하지 않습니다\n");
+	}
+}
 
 void find(List* target, int level) 
 {
@@ -113,20 +139,20 @@ void find(List* target, int level)
 	else {
 
 		if (cur->store->level == level) {
-			printf("가게이름: %s \n 가게 수입: %d\n 가게 임대료: %d\n 가게 재산: %d\n", cur->store->name, cur->store->income, cur->store->rent, cur->store->money);
+			printf("가게이름: %s \n    수입: %d\n  임대료: %d\n    재산: %d\n", cur->store->name, cur->store->income, cur->store->rent, cur->store->money);
 		}
 		cur = cur->after;
 		while (cur != target->head)
 		{
 			if (cur->store->level == level) {
-				printf("가게이름: %s \n 가게 수입: %d\n 가게 임대료: %d\n 가게 재산: %d\n", cur->store->name, cur->store->income, cur->store->rent, cur->store->money);
+				printf("가게이름: %s \n    수입: %d\n  임대료: %d\n    재산: %d\n", cur->store->name, cur->store->income, cur->store->rent, cur->store->money);
 			}
 			cur = cur->after;
 		}
 	}
 }
 
-void rfind(List* target, int level) //
+void rfind(List* target, int level)
 {
 	Node* cur = target->tail;
 
@@ -138,13 +164,13 @@ void rfind(List* target, int level) //
 
 		if (cur->store->level == level)
 			if (cur->store->level == level) {
-				printf("가게이름: %s \n 가게 수입: %d\n 가게 임대료: %d\n 가게 재산: %d\n", cur->store->name, cur->store->income, cur->store->rent, cur->store->money);
+				printf("가게이름: %s \n    수입: %d\n  임대료: %d\n    재산: %d\n", cur->store->name, cur->store->income, cur->store->rent, cur->store->money);
 			}
 		cur = cur->before;
 		while (cur != target->tail)
 		{
 			if (cur->store->level == level) {
-				printf("가게이름: %s \n 가게 수입: %d\n 가게 임대료: %d\n 가게 재산: %d\n", cur->store->name, cur->store->income, cur->store->rent, cur->store->money);
+				printf("가게이름: %s \n    수입: %d\n  임대료: %d\n    재산: %d\n", cur->store->name, cur->store->income, cur->store->rent, cur->store->money);
 			}
 			cur = cur->before;
 		}
@@ -169,11 +195,16 @@ int main() {
 	push_back(&list, &store4);
 	push_back(&list, &store5);
 
+
 	find(&list, 2);
 	printf("\n");
-	//delete(&list, 1);
+	check(delete(&list, 5));
+	printf("\n");
 	find(&list, 2);
-	printf("\n\n\n");
-	rfind(&list, 2);
+	printf("\n");
+	rfind(&list,2);
 
+	/*find(&list, 2);
+	printf("\n");
+	rfind(&list, 2);*/
 }
