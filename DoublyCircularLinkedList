@@ -159,6 +159,6 @@ int main() {
 	//delete(&list, 1);
 	find(&list, 2);
 	printf("\n\n\n");
-	find(&list, 2);
+	rfind(&list, 2);
 
 }
