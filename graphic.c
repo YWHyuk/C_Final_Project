@@ -622,4 +622,5 @@ void introduction(Player* player) {
 	slow_printf("10년이 지난후 지금, 비트코인을 구매하게 된 사실을 떠올렸다.\n");
 	sprintf(buffer, "%s는 불어난 돈으로 작은 건물을 구매하였다.\n", player->name);
 	slow_printf(buffer);
+
 }
