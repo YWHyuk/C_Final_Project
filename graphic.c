@@ -501,12 +501,12 @@ void show_ui(Player* player) {
 	show_ui_frame();
 	
 	show_ui_store_shape();
-	show_ui_store_info();
+	show_ui_store_info(player);
 
 	show_ui_floor();
 	show_ui_floor_info();
 	
-	show_ui_user_info();
+	show_ui_user_info(player);
 
 	setCursorXY(0, 37);
 }
