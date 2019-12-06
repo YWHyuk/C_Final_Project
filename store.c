@@ -53,7 +53,7 @@ void static make_store(Player * player, int i) {
 	strcpy(new_store.name, name[kind]);
 	new_store.rent = rent;
 	new_store.income = income;
-	new_store.id = i + 1;
+	new_store.id = i + 1+(player->reroll*SNUM);
 	new_store.money = 300 + rand() % 1000;
 	new_store.shape = shape;
 
@@ -93,6 +93,7 @@ void simulate(Player * player) {
 }//프로토타입과 달리 인자에서 Store*를 뺐습니다.
 
 void refresh_store(Player * player) {
+	player->reroll = player->reroll + 1;
 	srand((unsigned)time(NULL));
 	int i = 0;
 	for (i = 0; i < SNUM; i++) {
