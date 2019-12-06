@@ -48,7 +48,7 @@ void add_first(List* target, Store* store)
 		return;
 	}
 }
-/*void push_back(List* target, Store* store)
+void push_back(List* target, Store* store)
 {
 	Node* newNode = (Node*)malloc(sizeof(Node));
 	Node* cur = target->tail;
@@ -62,11 +62,11 @@ void add_first(List* target, Store* store)
 	newNode->before = target->head->before;
 	target->head->before = newNode;
 	target->tail->after = newNode;
+	target->tail = newNode;
 	newNode->store = store;
-}*/
+}
 
 /*
-//먼저 add를 해주고 난 다음에 실행해야 함
 void delete(List* target, int id)
 {
 	Node* temp = NULL;
@@ -100,7 +100,7 @@ void delete(List* target, int id)
 }
 */
 
-void rfind(List* target, int level) 
+void find(List* target, int level) 
 {
 
 	Node* cur = target->head;
@@ -118,7 +118,7 @@ void rfind(List* target, int level)
 	}
 }
 
-void find(List* target, int level)
+void rfind(List* target, int level)
 {
 	Node* cur = target->tail;
 
@@ -148,11 +148,11 @@ int main() {
 	Store store4 = { "피시방", 100, 50, 400, 4, 2 };
 	Store store5 = { "백반집", 100, 50, 400, 5, 2 };
 
-	add_first(&list, &store1);
-	add_first(&list, &store2);
-	add_first(&list, &store3);
-	add_first(&list, &store4);
-	add_first(&list, &store5);
+	push_back(&list, &store1);
+	push_back(&list, &store2);
+	push_back(&list, &store3);
+	push_back(&list, &store4);
+	push_back(&list, &store5);
 
 	find(&list, 2);
 	printf("\n");
