@@ -25,6 +25,7 @@ typedef struct store {
 	int money; //재산
 	Shape* shape;//모양 포인터
 	int id; // 가게 식별 번호
+	int level; // 가게 층 수
 }Store;
 
 typedef struct building{
@@ -34,7 +35,6 @@ typedef struct building{
 
 typedef struct floor{
 	Cell* cell; //한 층의 칸들
-	int height; //가로
 	int width; //세로
 }Floor;
 
