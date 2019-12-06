@@ -1,6 +1,8 @@
 ﻿#include "MyConsole.h"
 #include "prototype.h"
+#include "graphic.h"
 #include <stdio.h>
+#include <string.h>
 #include <time.h>
 #include <stdlib.h>
 #include <math.h>
@@ -402,4 +404,14 @@ void print_Rentprocess(Cell* cell, Shape* shape) {
 		textcolor(WHITE, BLACK);
 		printf("\n");
 	}
+}
+void slow_printf(char *str) {
+	unsigned long i, sz = strlen(str);
+	COORD temp = getCursorCoord();
+	setCursorXY(CONSOLE_X - sz/2,temp.Y);
+	for (i = 0ul; i < sz; i++) {
+		printf("%c", str[i]);
+		Sleep(100);
+	}
+	getchar();
 }

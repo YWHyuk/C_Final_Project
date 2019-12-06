@@ -60,11 +60,6 @@ Player* init_player() {
 	player = (Player*)calloc(0, sizeof(Player));
 	player->name = (char*)malloc(sizeof(char) * 10);
 
-	printf("사용자의 이름을 입력해주세요 : ");
-	scanf("%s", player->name);
-	printf("초기자본을 입력해주세요 : ");
-	scanf("%d", &(player->money));
-
 	player->uncontracted_store = (Store*)calloc(1, sizeof(Store) * SNUM);//10개 할당
 	player->contracted_store = (Store*)calloc(1, sizeof(Store) * SNUM);//10개 할당
 

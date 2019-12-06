@@ -1,5 +1,4 @@
 ﻿#pragma once
-#include "graphic.h"
 #include "shape.h"
 #include "MyConsole.h"
 #include <stdlib.h>

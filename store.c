@@ -1,5 +1,5 @@
 ﻿#include "prototype.h"
-
+#include "graphic.h"
 /* Cell의 사이즈와 shape의 사이즈가 같다고 가정한다. */
 void static mapping(Cell* cell, Store* store) {
 	int width = get_Width(store->shape);

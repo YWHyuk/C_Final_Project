@@ -1,9 +1,10 @@
 #include "prototype.h"
-
+#include "graphic.h"
 int main() {
 	int level = select_level(60,20);
 	system("cls");
 	Player* player = init_player();
+	introduction(player);
 	init_BLD(player);
 	show_BLD(player->building);
 	//expand_BLD(player, player->building);
