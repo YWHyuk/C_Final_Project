@@ -353,6 +353,10 @@ void show_ui_store_shape() {
 
 }
 void show_ui_store_info(Store* store) {
+	setCursorXY(75, 4);
+	printf("▲");
+	setCursorXY(75, 25);
+	printf("▼");
 
 	setCursorXY(66, 19);
 	printf("가게이름 : %9s",store->name);
@@ -380,7 +384,6 @@ void show_ui_floor() {
 	}
 }
 void show_ui_floor_info(int level) {// 층 선택
-
 
 	setCursorXY(25, 26);
 	printf("◀%03d층▶",level);
@@ -458,26 +461,6 @@ void show_ui_frame() {
 	printf("┌┘       └┐");
 	setCursorXY(10, 35);
 	printf("└─────────┘");
-
-	/*
-	setCursorXY(14, 30);
-	printf("■■");
-	setCursorXY(14, 31);
-	printf("■■");
-
-	setCursorXY(12, 33);
-	printf("■■■■");
-	setCursorXY(10, 34);
-	printf("■■■■■■");
-	setCursorXY(10, 35);
-	printf("■■■■■■");
-	*/
-
-	setCursorXY(75, 4);
-	printf("▲");
-	setCursorXY(75, 25);
-	printf("▼");
-
 }
 void show_ui_user_info(Player* player) {
 	
@@ -490,25 +473,81 @@ void show_ui_user_info(Player* player) {
 	setCursorXY(62, 32);
 	printf("현재 재산 : %8d원",player->money);//추가
 }
+void clear_right_rect() {
+	int i;
+	for (i = 3; i < 28; i++) {
+		setCursorXY(55, i);
+		printf("                                       ");
+	}
+	
+	setCursorXY(0, 0);
+}
+void show_ui_menu(int menu) {
+	clear_right_rect();
 
+	setCursorXY(62, menu * 5);
+	printf("▶");
+
+	setCursorXY(67, 5);
+	printf("1. 시뮬레이션");//추가
+
+	setCursorXY(67, 10);
+	printf("2. 세입자 구하기");//추가
+
+	setCursorXY(67, 15);
+	printf("3. 건물 확장하기");//추가
+
+	setCursorXY(67, 20);
+	printf("4. 입주 가게 정보");//추가
+
+	setCursorXY(67, 25);
+	printf("5. 종료하기");//추가
+};
 void show_ui(Player* player) {
-	int level = 1;
 
+	KEY_EVENT_RECORD input;
+	int level = 1;
+	int menu = 1;
+
+	setCursorVisibility(0);
 	setConsoleSize(50, 40);
 	setFontSize(12);
 
 	show_ui_frame();
 	
-	show_ui_store_shape();
-	show_ui_store_info(player->uncontracted_store); /* for test change with linked list */
-
-	show_ui_floor();
-	show_ui_floor_info(level);
-	
 	show_ui_user_info(player);
 
 	setCursorXY(0, 37);
-}
+	/* 입력 처리 루틴 */
+	while (1) {
+		show_ui_menu(menu);
+
+		show_ui_floor();
+		show_ui_floor_info(level);
+
+		input = getVirtualKeyCode();
+
+		switch (input.wVirtualKeyCode) {
+		case VK_UP:
+			menu = menu > 1 ? menu - 1 : menu;
+			break;
+		case VK_DOWN:
+			menu = menu < 5 ? menu + 1 : menu;
+			break;
+		case VK_LEFT:
+			level = level > 1 ? level - 1 : level;
+			break;
+		case VK_RIGHT:
+			level = level < player->building->level ? level + 1 : level;
+			break;
+		case VK_RETURN:
+			/* 고른 메뉴에 따라 스타트 */
+			break;
+		default:
+			break;
+		}
+	}
+	}
 
 void clear_all() {
 	int i;
