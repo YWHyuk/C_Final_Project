@@ -88,7 +88,7 @@ void simulate(Player * player) {
 		//렌트비 못내면 어떻게 할지 구현
 		player->money += player->contracted_store[i].rent;//각 가게 임대료만큼 플레이어 자산 증가
 	}
-	player->money -= (player->building->level * TAX);//층*세금 만큼 플레이어 자산 감소
+	player->money -= (player->building->level * player->tax);//층*세금 만큼 플레이어 자산 감소
 
 }//프로토타입과 달리 인자에서 Store*를 뺐습니다.
 
