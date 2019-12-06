@@ -11,6 +11,7 @@ typedef struct player {
 	int money; //건물주 재산
 	int tax; // 층의 수에 따른 세금
 	struct store* uncontracted_store;//임대안된 가게 리스트
+	int reroll;
 }Player;
 
 typedef struct cell{
@@ -26,6 +27,7 @@ typedef struct store {
 	Shape* shape;//모양 포인터
 	int id; // 가게 식별 번호
 	int level; // 가게 층 수
+	int reroll;
 }Store;
 
 typedef struct building{
