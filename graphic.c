@@ -1,4 +1,4 @@
-﻿#include "MyConsole.h"
+#include "MyConsole.h"
 #include "prototype.h"
 #include "graphic.h"
 #include <stdio.h>
@@ -370,19 +370,89 @@ void show_ui_store_info(Store* store) {
 	setCursorXY(66, 22);
 	printf("재산   : %9d원",store->money);
 }
-void show_ui_floor() {
-
-	int i, j;
-
-	for (i = 0; i < 20; i++) {
-
-		setCursorXY(10, 5 + i);
-
-		for (j = 0; j < 20; j++) {
-			printf("□");
+void init_BigMap(Player* player, int width, int height) {
+	
+	int i = 0;
+	for (int i = 0; i < (2 * width)*(2 * height); i++) {
+		player->building->floor->map[i] = 0;
+	}
+}
+void copy_print(int* map, int x, int y, int width, int height) {
+	int i = 0, j = 0;
+	for (i = 0; i < 2; i++) {
+		for (j = 0; j < 2; j++) {
+			map[(x + i) * 2 * width + y + j] = map[x*2*width+y];
 		}
 	}
 }
+void copy_print_zero(int* map, int x, int y, int width, int height) {
+	int i = 0, j = 0;
+	for (i = 0; i < 2; i++) {
+		for (j = 0; j < 2; j++) {
+			map[(x + i) * 2 * width+ y + j] = 0;
+		}
+	}
+
+}
+
+void show_ui_floor(Player* player,Cell* cell) {
+
+	int i, j;
+	
+	int* map = player->building->floor->map;
+	int width = player->building->floor->width;
+	cell = player->building->floor->cell;
+	
+	
+	
+	for (i = 0; i < 2 * width; i += 2) {
+		for (j = 0; j < 2 * width; j += 2) {
+			if (map[i * 2 * width + j] != 0) {
+				copy_print(map, i, j, width, width);
+			}
+			if (map[i * 2 * width + j] == 0) {
+				copy_print_zero(map, i, j, width, width);
+			}
+		}
+	}
+
+
+	for (i = 0; i< 2*width; i++) {
+	
+		setCursorXY(10, 5 + i);
+
+		for(j=0;j<2*width;j++){
+			
+			if (map[i * 2 * width + j] == 3) {
+				/* 겹치는 칸 */
+				textcolor(RED, BLACK);
+				printf("■");
+				
+			}
+			else if (map[i * 2 * width + j] == 1) {
+				/* 기존의 상점만 차지하는 칸 */
+				textcolor(GREEN, BLACK);
+				printf("■");
+			}
+			else if (map[i * 2 * width + j] == 2) {
+				/* 새로운 상점만 차지하는 칸 */
+				textcolor(BLUE, BLACK);
+				printf("■");
+			}
+			else if (map[i * 2 * width + j] == 0) {
+				textcolor(WHITE, BLACK);
+				printf("□");
+			}
+		}
+			printf("\n");
+	}
+}
+
+
+
+		
+
+
 void show_ui_floor_info(int level) {// 층 선택
 
 	setCursorXY(25, 26);
@@ -508,6 +578,10 @@ void show_ui(Player* player) {
 	KEY_EVENT_RECORD input;
 	int level = 1;
 	int menu = 1;
+	int width = player->building->floor->width;
+	player->building->floor->map= (int*)malloc(sizeof(2 * width)*(2 * width));
+	init_BigMap(player, width, width);
+	Cell* cell = player->building->floor->cell;
 
 	setCursorVisibility(0);
 	setConsoleSize(50, 40);
@@ -522,7 +596,7 @@ void show_ui(Player* player) {
 	while (1) {
 		show_ui_menu(menu);
 
-		show_ui_floor();
+		show_ui_floor(player,cell);
 		show_ui_floor_info(level);
 
 		input = getVirtualKeyCode();
@@ -581,7 +655,43 @@ void scan_store(Store* store, int id) {
 	printf("%s      %d      %d      %d      %d\n", \
 		store[id - 1].name, store[id - 1].money, store[id - 1].rent, store[id - 1].income, store[id - 1].id);
 }//가게 정보를 불러온다.
-
+void print_Rentprocess(Player* player, Cell* cell, Shape* shape) {
+	int width = get_Width(shape);
+	int height = get_Height(shape);
+	int x, y;
+	int* map = player->building->floor->map;
+	for (x = 0; x < width; x++) {
+		for (y = 0; y < height; y++) {
+			Block tmp = get_Block(shape, x, y);
+			if (tmp == exist && cell[x*width + y].valid == 1) {
+				map[x * 2 * 2 * width + y * 2] = 3;
+				/* 겹치는 칸 */
+				textcolor(RED, BLACK);
+				printf("■");
+			}
+			else if (tmp != exist && cell[x*width + y].valid == 1) {
+				/* 기존의 상점만 차지하는 칸 */
+				map[x * 2 * 2 * width + y * 2] = 1;
+				textcolor(GREEN, BLACK);
+				printf("■");
+			}
+			else if (tmp == exist && cell[x*width + y].valid != 1) {
+				/* 새로운 상점만 차지하는 칸 */
+				map[x * 2 * 2 * width + y * 2] = 2;
+				textcolor(BLUE, BLACK);
+				printf("■");
+			}
+			else {
+				/* 비어있는 칸 */
+				map[x * 2 * 2 * width + y * 2] = 0;
+				textcolor(WHITE, BLACK);
+				printf("□");
+			}
+		}
+		textcolor(WHITE, BLACK);
+		printf("\n");
+	}
+}
 void show_floor(Player* player, Store* store, int level) {
 	int i, j;
 	Floor* dest_floor = player->building->floor + level;
@@ -597,38 +707,7 @@ void show_floor(Player* player, Store* store, int level) {
 		printf("\n");
 	}
 }
-void print_Rentprocess(Cell* cell, Shape* shape) {
-	int width = get_Width(shape);
-	int height = get_Height(shape);
-	int x, y;
-	for (x = 0; x < width; x++) {
-		for (y = 0; y < height; y++) {
-			Block tmp = get_Block(shape, x, y);
-			if (tmp == exist && cell[x*width + y].valid == 1) {
-				/* 겹치는 칸 */
-				textcolor(RED, BLACK);
-				printf("■");
-			}
-			else if (tmp != exist && cell[x*width + y].valid == 1) {
-				/* 기존의 상점만 차지하는 칸 */
-				textcolor(GREEN, BLACK);
-				printf("■");
-			}
-			else if (tmp == exist && cell[x*width + y].valid != 1) {
-				/* 새로운 상점만 차지하는 칸 */
-				textcolor(BLUE, BLACK);
-				printf("■");
-			}
-			else {
-				/* 비어있는 칸 */
-				textcolor(WHITE, BLACK);
-				printf("□");
-			}
-		}
-		textcolor(WHITE, BLACK);
-		printf("\n");
-	}
-}
+
 
 void slow_printf(char *str) {
 	unsigned long i, sz = strlen(str);
