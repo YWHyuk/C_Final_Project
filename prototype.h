@@ -38,6 +38,7 @@ typedef struct building{
 typedef struct floor{
 	Cell* cell; //한 층의 칸들
 	int width; //세로
+	int* map;
 }Floor;
 
 
