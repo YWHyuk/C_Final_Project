@@ -6,6 +6,19 @@
 #include <windows.h>
 #include <conio.h>
 
+typedef struct Node //노드 개별을 의미
+{
+	Store* store;
+	struct Node* before;
+	struct Node* after;
+}Node;
+
+typedef struct list //리스트 
+{
+	Node* head;
+	Node* tail;
+}List;
+
 void list_init(List* target)
 {
 	target->head = NULL;
