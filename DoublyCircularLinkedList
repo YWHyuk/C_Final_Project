@@ -120,7 +120,7 @@ void check(int bool) {
 		printf("가게와의 계약을 취소했습니다.\n");
 	}
 	else if(bool == -1) {
-		printf("해당 아이디를 가진 가게가 존재하지 않습니다\n");
+		printf(가게가 존재하지 않습니다\n");
 	}
 	else {
 		printf("해당 아이디를 가진 가게가 존재하지 않습니다\n");
