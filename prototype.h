@@ -41,6 +41,19 @@ typedef struct floor{
 	int* map;
 }Floor;
 
+typedef struct Node //노드 개별을 의미
+{
+	Store* store;
+	struct Node* before;
+	struct Node* after;
+}Node;
+
+typedef struct list //리스트 
+{
+	Node* head;
+	Node* tail;
+}List;
+
 
 #define SNUM 10//가게개수
 #define TAX 10//층당 세금
