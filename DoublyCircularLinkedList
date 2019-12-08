@@ -39,7 +39,7 @@ void add_first(List* target, Store* store) //tail은 고정 head는 계속 새�
 		return;
 	}
 	
-	if (target->head != NULL)
+	if (target->head != NULL) 
 	{
 		newNode->before = target->head->before;
 		target->tail->after = newNode;
@@ -50,7 +50,7 @@ void add_first(List* target, Store* store) //tail은 고정 head는 계속 새�
 	}
 }
 
-void push_back(List* target, Store* store)
+void push_back(List* target, Store* store) //head는 고정 tail이 계속 newNode를 가리키게됨
 {
 	Node* newNode = (Node*)malloc(sizeof(Node));
 	Node* cur = target->tail;
