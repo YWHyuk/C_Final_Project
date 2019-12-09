@@ -1,4 +1,4 @@
-#include "MyConsole.h"
+﻿#include "MyConsole.h"
 #include "prototype.h"
 #include "graphic.h"
 #include <stdio.h>
@@ -338,131 +338,85 @@ int select_level () {
 	} while (1);
 }
 
-void show_ui_store_shape() {
+void show_ui_store_shape(Store* store) {
 
 	int i, j;
-
-	for (i = 0; i < 10; i++) {
-
-		setCursorXY(66, 7 + i);
-
-		for (j = 0; j < 10; j++) {
-			printf("□");
+	Block b;
+	clear_right_rect();
+	if (store != NULL) 
+		for (i = 0; i < 10; i++) {
+			setCursorXY(66, 7 + i);
+			for (j = 0; j < 10; j++) {
+				b = get_Block(store->shape, i, j);
+				if (b == exist)
+					printf("■");
+				else
+					printf("□");
+			}
 		}
-	}
 
+}
+void show_ui_rent_command() {
+	setCursorXY(58, 26);
+	printf("Q: 모양 재설정  W: 시계 방향 회전");
+
+	setCursorXY(58, 27);
+	printf("W: 반시계 방향 회전 R: 계약하기");
 }
 void show_ui_store_info(Store* store) {
 	setCursorXY(75, 4);
 	printf("▲");
 	setCursorXY(75, 25);
 	printf("▼");
-
-	setCursorXY(66, 19);
-	printf("가게이름 : %9s",store->name);
-
-	setCursorXY(66, 20);
-	printf("임대료 : %9d원",store->rent);
-
-	setCursorXY(66, 21);
-	printf("수익   : %9d원",store->income);
-
-	setCursorXY(66, 22);
-	printf("재산   : %9d원",store->money);
-}
-void init_BigMap(Player* player, int width, int height) {
-	
-	int i = 0;
-	for (int i = 0; i < (2 * width)*(2 * height); i++) {
-		player->building->floor->map[i] = 0;
+	if(store == NULL){
+		setCursorXY(60, 19);
+		printf("해당 층은 입주한 가게가 없습니다");
 	}
-}
-void copy_print(int* map, int x, int y, int width, int height) {
-	int i = 0, j = 0;
-	for (i = 0; i < 2; i++) {
-		for (j = 0; j < 2; j++) {
-			map[(x + i) * 2 * width + y + j] = map[x*2*width+y];
-		}
-	}
-}
-void copy_print_zero(int* map, int x, int y, int width, int height) {
-	int i = 0, j = 0;
-	for (i = 0; i < 2; i++) {
-		for (j = 0; j < 2; j++) {
-			map[(x + i) * 2 * width+ y + j] = 0;
-		}
-	}
+	else {
+		setCursorXY(66, 19);
+		printf("가게이름 : %9s", store->name);
 
+		setCursorXY(66, 20);
+		printf("임대료 : %9d원", store->rent);
+
+		setCursorXY(66, 21);
+		printf("수익   : %9d원", store->income);
+
+		setCursorXY(66, 22);
+		printf("재산   : %9d원", store->money);
+	}
 }
 
 void show_ui_floor(Player* player,Cell* cell) {
 
 	int i, j;
-	
-	int* map = player->building->floor->map;
+	int color;
 	int width = player->building->floor->width;
-	cell = player->building->floor->cell;
-	
-	
-	
-	for (i = 0; i < 2 * width; i += 2) {
-		for (j = 0; j < 2 * width; j += 2) {
-			if (map[i * 2 * width + j] != 0) {
-				copy_print(map, i, j, width, width);
-			}
-			if (map[i * 2 * width + j] == 0) {
-				copy_print_zero(map, i, j, width, width);
-			}
+	for (i = 0; i<width; i++) {
+		for (j = 0; j < width; j++) {
+			if (cell[i * width + j].valid == 1)
+				color = (cell[i * width + j].store->id % (WHITE - 1)) + 1;/* 1 ~ 14 */
+			else 
+				color = WHITE;
+			textcolor(color,color);
+			setCursorXY(10 + 4*j, 5 + i* 2);
+			printf("    ");
+			setCursorXY(10 + 4*j, 5 + i* 2 + 1);
+			printf("    ");
 		}
 	}
-
-
-	for (i = 0; i< 2*width; i++) {
-	
-		setCursorXY(10, 5 + i);
-
-		for(j=0;j<2*width;j++){
-			
-			if (map[i * 2 * width + j] == 3) {
-				/* 겹치는 칸 */
-				textcolor(RED, BLACK);
-				printf("■");
-				
-			}
-			else if (map[i * 2 * width + j] == 1) {
-				/* 기존의 상점만 차지하는 칸 */
-				textcolor(GREEN, BLACK);
-				printf("■");
-			}
-			else if (map[i * 2 * width + j] == 2) {
-				/* 새로운 상점만 차지하는 칸 */
-				textcolor(BLUE, BLACK);
-				printf("■");
-			}
-			else if (map[i * 2 * width + j] == 0) {
-				textcolor(WHITE, BLACK);
-				printf("□");
-			}
-		}
-			printf("\n");
-	}
+	textcolor(BLACK, WHITE);
 }
 
-
-
-		
-
-
 void show_ui_floor_info(int level) {// 층 선택
-
+	textcolor(WHITE, BLACK);
 	setCursorXY(25, 26);
 	printf("◀%03d층▶",level);
-
 }
 void show_ui_frame() {
 
 	int i;
-
+	textcolor(WHITE, BLACK);
 	setCursorXY(4, 2);
 	printf("┌─────────────────────────────────────────────────┬───────────────────────────────────────┐");
 
@@ -533,7 +487,7 @@ void show_ui_frame() {
 	printf("└─────────┘");
 }
 void show_ui_user_info(Player* player) {
-	
+	textcolor(WHITE, BLACK);
 	setCursorXY(28, 31);
 	printf("이름 : %10s",player->name);//추가
 
@@ -543,16 +497,8 @@ void show_ui_user_info(Player* player) {
 	setCursorXY(62, 32);
 	printf("현재 재산 : %8d원",player->money);//추가
 }
-void clear_right_rect() {
-	int i;
-	for (i = 3; i < 28; i++) {
-		setCursorXY(55, i);
-		printf("                                       ");
-	}
-	
-	setCursorXY(0, 0);
-}
 void show_ui_menu(int menu) {
+	textcolor(WHITE, BLACK);
 	clear_right_rect();
 
 	setCursorXY(62, menu * 5);
@@ -573,31 +519,152 @@ void show_ui_menu(int menu) {
 	setCursorXY(67, 25);
 	printf("5. 종료하기");//추가
 };
-void show_ui(Player* player) {
-
+void show_ui_rent(Player* player, int* level) {
 	KEY_EVENT_RECORD input;
-	int level = 1;
-	int menu = 1;
+	Cell* cell;
+	Store* store;
 	int width = player->building->floor->width;
-	player->building->floor->map= (int*)malloc(sizeof(2 * width)*(2 * width));
-	init_BigMap(player, width, width);
-	Cell* cell = player->building->floor->cell;
 
 	setCursorVisibility(0);
 	setConsoleSize(50, 40);
 	setFontSize(12);
-
 	show_ui_frame();
-	
-	show_ui_user_info(player);
 
 	setCursorXY(0, 37);
+
+	if (player->uncontracted_store.cursor->item == NULL)
+		find(&(player->uncontracted_store), -1);
+
 	/* 입력 처리 루틴 */
 	while (1) {
+		cell = player->building->floor[*level - 1].cell;
+		store = (Store*)(player->uncontracted_store.cursor->item);
+		show_ui_store_shape(store);
+		show_ui_store_info(store);
+		show_ui_rent_command();
+
+		print_Rentprocess(player, cell, store->shape);
+		show_ui_floor_info(*level);
+
+		show_ui_user_info(player);
+
+		input = getVirtualKeyCode();
+
+		switch (input.wVirtualKeyCode) {
+		case VK_UP:
+			find(&(player->uncontracted_store), -1);
+			break;
+		case VK_DOWN:
+			rfind(&(player->uncontracted_store), -1);
+			break;
+		case VK_LEFT:
+			*level = *level > 1 ? *level - 1 : *level;
+			break;
+		case VK_RIGHT:
+			*level = *level < player->building->level ? *level + 1 : *level;
+			break;
+		case VK_Q:
+			delete_Shape(store->shape);
+			store->shape = make_Shape(WIDTH, WIDTH);
+			break;
+		case VK_W:
+			rotate_Clock(store->shape);
+			break;
+		case VK_E:
+			rotate_CounterClock(store->shape);
+			break;
+		case VK_R:
+			if (rent_store(player, *level, store)) {
+				MessageBox(NULL, _T("계약 실패...!"), _T("알림"), MB_OK);
+			}
+			else {
+				MessageBox(NULL, _T("계약 성공!"), _T("알림"), MB_OK);
+				return;
+			}
+			break;
+		case VK_RETURN:
+			return;
+		}
+	}
+}
+void show_ui_info(Player* player, int* level) {
+	KEY_EVENT_RECORD input;
+	Cell* cell;
+	Store* store;
+	int width = player->building->floor->width;
+
+	setCursorVisibility(0);
+	setConsoleSize(50, 40);
+	setFontSize(12);
+	show_ui_frame();
+
+	setCursorXY(0, 37);
+
+	if (player->contracted_store.cursor->item == NULL)
+		find(&(player->contracted_store), (*level)-1);
+
+	/* 입력 처리 루틴 */
+	while (1) {
+		cell = player->building->floor[*level - 1].cell;
+		store = (Store*)(player->contracted_store.cursor->item);
+		show_ui_store_shape(store);
+		show_ui_store_info(store);
+
+		print_Focus_shape(player, cell, store);
+		show_ui_floor_info(*level);
+
+		show_ui_user_info(player);
+
+		input = getVirtualKeyCode();
+
+		switch (input.wVirtualKeyCode) {
+		case VK_UP:
+			find(&(player->contracted_store), (*level)-1);
+			break;
+		case VK_DOWN:
+			rfind(&(player->contracted_store), (*level)-1);
+			break;
+		case VK_LEFT:
+			*level = *level > 1 ? *level - 1 : *level;
+			refresh_Cursor(&(player->contracted_store));
+			find(&(player->contracted_store), (*level)-1);
+			break;
+		case VK_RIGHT:
+			*level = *level < player->building->level ? *level + 1 : *level;
+			refresh_Cursor(&(player->contracted_store));
+			find(&(player->contracted_store), (*level)-1);
+			break;
+		case VK_RETURN:
+			return;
+		}
+	}
+}
+void show_ui(Player* player) {
+	
+	KEY_EVENT_RECORD input;
+	Cell* cell;
+
+	int level = 1;
+	int menu = 1;
+	int width = player->building->floor->width;
+
+	setCursorVisibility(0);
+	setConsoleSize(50, 40);
+	setFontSize(12);
+	show_ui_frame();
+	
+	setCursorXY(0, 37);
+
+	/* 입력 처리 루틴 */
+	while (1) {
+		cell = player->building->floor[level - 1].cell;
+
 		show_ui_menu(menu);
 
 		show_ui_floor(player,cell);
 		show_ui_floor_info(level);
+
+		show_ui_user_info(player);
 
 		input = getVirtualKeyCode();
 
@@ -616,12 +683,34 @@ void show_ui(Player* player) {
 			break;
 		case VK_RETURN:
 			/* 고른 메뉴에 따라 스타트 */
+			switch (menu) {
+			case SIMUL:
+				if (simulate(player)) {
+					/* game over*/
+					MessageBox(NULL, _T("Game Over!"), _T("알림"), MB_OK);
+					return;
+				}
+				break;
+			case RENT:
+				show_ui_rent(player, &level);
+				break;
+			case EXPAND:
+				clear_right_rect();
+				expand_BLD(player);
+				getVirtualKeyCode();
+				break;
+			case INFO:
+				show_ui_info(player, &level);
+				break;
+			case QUIT:
+				return;
+			}
 			break;
 		default:
 			break;
 		}
 	}
-	}
+}
 
 void clear_all() {
 	int i;
@@ -629,6 +718,15 @@ void clear_all() {
 		setCursorXY(0, i);
 		printf("                                                                                                    ");
 	}
+	setCursorXY(0, 0);
+}
+void clear_right_rect() {
+	int i;
+	for (i = 3; i < 28; i++) {
+		setCursorXY(55, i);
+		printf("                                       ");
+	}
+
 	setCursorXY(0, 0);
 }
 
@@ -651,45 +749,75 @@ void show_BLD(Building* b_addr) {
 	}
 }
 
-void scan_store(Store* store, int id) {
-	printf("%s      %d      %d      %d      %d\n", \
-		store[id - 1].name, store[id - 1].money, store[id - 1].rent, store[id - 1].income, store[id - 1].id);
-}//가게 정보를 불러온다.
 void print_Rentprocess(Player* player, Cell* cell, Shape* shape) {
 	int width = get_Width(shape);
 	int height = get_Height(shape);
 	int x, y;
-	int* map = player->building->floor->map;
+	int color;
 	for (x = 0; x < width; x++) {
 		for (y = 0; y < height; y++) {
 			Block tmp = get_Block(shape, x, y);
-			if (tmp == exist && cell[x*width + y].valid == 1) {
-				map[x * 2 * 2 * width + y * 2] = 3;
+			if (tmp == exist && cell[x*width + y].valid == 1)
 				/* 겹치는 칸 */
-				textcolor(RED, BLACK);
-				printf("■");
-			}
-			else if (tmp != exist && cell[x*width + y].valid == 1) {
+				color = RED;
+			else if (tmp != exist && cell[x*width + y].valid == 1)
 				/* 기존의 상점만 차지하는 칸 */
-				map[x * 2 * 2 * width + y * 2] = 1;
-				textcolor(GREEN, BLACK);
-				printf("■");
-			}
-			else if (tmp == exist && cell[x*width + y].valid != 1) {
+				color = GREEN;
+			else if (tmp == exist && cell[x*width + y].valid != 1)
 				/* 새로운 상점만 차지하는 칸 */
-				map[x * 2 * 2 * width + y * 2] = 2;
-				textcolor(BLUE, BLACK);
-				printf("■");
-			}
-			else {
+				color = BLUE;
+			else
 				/* 비어있는 칸 */
-				map[x * 2 * 2 * width + y * 2] = 0;
-				textcolor(WHITE, BLACK);
-				printf("□");
+				color = WHITE;
+			textcolor(color, color);
+			setCursorXY(10 + 4 * y, 5 + x * 2);
+			printf("    ");
+			setCursorXY(10 + 4 * y, 5 + x * 2 + 1);
+			printf("    ");
+		}
+	}
+	textcolor(BLACK, WHITE);
+}
+void print_Focus_shape(Player* player, Cell* cell, Store* store) {
+	int width = player->building->floor->width;
+	int x, y;
+	int color;
+	if (store == NULL) {	
+		for (x = 0; x < width; x++) {
+			for (y = 0; y < width; y++) {
+				if (cell[x * width + y].valid == 1)
+					color = GREEN;/* 1 ~ 14 */
+				else
+					color = WHITE;
+				textcolor(color, color);
+				setCursorXY(10 + 4 * y, 5 + x * 2);
+				printf("    ");
+				setCursorXY(10 + 4 * y, 5 + x * 2 + 1);
+				printf("    ");
 			}
 		}
-		textcolor(WHITE, BLACK);
-		printf("\n");
+		textcolor(BLACK, WHITE);
+	}
+
+	else {
+		for (x = 0; x < width; x++) {
+			for (y = 0; y < width; y++) {
+				if (cell[x*width + y].store == store)
+					/* 겹치는 칸 */
+					color = GREEN;
+				else if (cell[x*width + y].store == NULL)
+					/* 기존의 상점만 차지하는 칸 */
+					color = WHITE;
+				else 
+					color = RED;
+				textcolor(color, color);
+				setCursorXY(10 + 4 * y, 5 + x * 2);
+				printf("    ");
+				setCursorXY(10 + 4 * y, 5 + x * 2 + 1);
+				printf("    ");
+			}
+		}
+		textcolor(BLACK, WHITE);
 	}
 }
 void show_floor(Player* player, Store* store, int level) {
@@ -707,10 +835,38 @@ void show_floor(Player* player, Store* store, int level) {
 		printf("\n");
 	}
 }
+int get_IntByArrow(int money) {
+	int ret = 1;
+	KEY_EVENT_RECORD input;
+	while (1) {
+		setCursorXY(75, 17);
+		printf("▲");
+		setCursorXY(75, 21);
+		printf("▼");
+		setCursorXY(75, 19);
+		printf("%d",ret);
+		setCursorXY(70, 23);
+		printf("비용 : %d", FLOOR_PRICE * ret);
 
-
+		input = getVirtualKeyCode();
+		switch (input.wVirtualKeyCode) {
+		case VK_UP:
+			ret = ret >= 9 ? 0 : ret + 1;
+			break;
+		case VK_DOWN:
+			ret = ret <= 1 ? 9 : ret - 1;
+			break;
+		case VK_RETURN:
+			if (money > FLOOR_PRICE * ret)
+				return ret;
+			else
+				MessageBox(NULL, _T("돈이 부족합니다!"), _T("알림"), MB_OK);
+			break;
+		}
+	}
+}
 void slow_printf(char *str) {
-	unsigned long i, sz = strlen(str);
+	unsigned long i, sz = (unsigned long)strlen(str);
 	COORD temp = getCursorCoord();
 	setCursorXY(CONSOLE_X - sz/2,temp.Y);
 	for (i = 0ul; i < sz; i++) {
@@ -720,7 +876,9 @@ void slow_printf(char *str) {
 		}
 		else
 			printf("%c",str[i]) ; //아니면 그냥 출력
+#ifdef DEBUG
 		Sleep(50);
+#endif
 	}
 	return;
 }

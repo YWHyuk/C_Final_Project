@@ -1,17 +1,18 @@
 ﻿#pragma once
 #include "shape.h"
 #include "MyConsole.h"
+#include "DoublyCircularLinkedList.h"
 #include <stdlib.h>
 #include <string.h>
 
 typedef struct player {
 	char* name;
-	struct building* building; // 소유한 건물
-	struct store* contracted_store; //임대된 가게 리스트
-	int money; //건물주 재산
-	int tax; // 층의 수에 따른 세금
+	struct building* building;		// 소유한 건물
+	List contracted_store;			//임대된 가게 리스트
+	List uncontracted_store;		//임대안된 가게 리스트
+	int money;						//건물주 재산
+	int tax;						// 층의 수에 따른 세금
 	int reroll;
-	struct store* uncontracted_store;//임대안된 가게 리스트
 }Player;
 
 typedef struct cell{
@@ -38,38 +39,25 @@ typedef struct building{
 typedef struct floor{
 	Cell* cell; //한 층의 칸들
 	int width; //세로
-	int* map;
 }Floor;
-
-typedef struct Node //노드 개별을 의미
-{
-	Store* store;
-	struct Node* before;
-	struct Node* after;
-}Node;
-
-typedef struct list //리스트 
-{
-	Node* head;
-	Node* tail;
-}List;
 
 
 #define SNUM 10//가게개수
-#define TAX 10//층당 세금
-
+#define TAX 1000//층당 세금
+#define WIDTH 10
+#define FLOOR_PRICE 10000
 
 //========================================================================== =
 
-void rent_store(Player* player, Store* store); //사용자의 입력을 받아 입주시키기 =============>이형일
+int rent_store(Player* player,int level, Store* store); //사용자의 입력을 받아 입주시키기 =============>이형일
 
 void kick_store(Building* b_addr);//사용자의 입력을 받아 쫓아내기=============>이지훈
 
-void expand_BLD(Building* b_addr);//건물확장     =============> 이지훈
+void expand_BLD(Player* player);//건물확장     =============> 이지훈
 
 //========================================================================== =
 
-void simulate(Player* player);//수익을 계산해서 show =============>김민혁
+int simulate(Player* player);//수익을 계산해서 show =============>김민혁
 
 //========================================================================== =
 

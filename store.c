@@ -1,5 +1,7 @@
 ﻿#include "prototype.h"
 #include "graphic.h"
+#include "DoublyCircularLinkedList.h"
+
 /* Cell의 사이즈와 shape의 사이즈가 같다고 가정한다. */
 void static mapping(Cell* cell, Store* store) {
 	int width = get_Width(store->shape);
@@ -42,25 +44,29 @@ int static unmapping(Building* b_addr, int level, int idnum) {
 void static make_store(Player * player, int i) {
 	char name[10][10] = { "횟집","마트","고기집","주막","문구점","영화관","주차장","카페","백반집","세탁소" };
 	int income, rent, kind;
-	Store new_store;
-	Shape *shape = make_Shape(3, 3);
+	Store* new_store = (Store*)malloc(sizeof(Store));
+	Shape *shape = make_Shape(10, 9);
 
 	kind = rand() % 10;
 	income = 300 + rand() % 100;
 	rent = 300 + rand() % 100; //300~400
 
-	new_store.name = (char*)malloc(sizeof(char) * 10);
-	strcpy(new_store.name, name[kind]);
-	new_store.rent = rent;
-	new_store.income = income;
-	new_store.id = i + 1+(player->reroll*SNUM);
-	new_store.money = 300 + rand() % 1000;
-	new_store.shape = shape;
+	new_store->name = (char*)malloc(sizeof(char) * 10);
+	strcpy(new_store->name, name[kind]);
+	new_store->rent = rent;
+	new_store->income = income;
+	new_store->id = i + 1+(player->reroll*SNUM);
+	new_store->money = 300 + rand() % 1000;
+	new_store->shape = shape;
 
-	if (player->uncontracted_store[i].shape != NULL)
-		delete_Shape(player->uncontracted_store[i].shape);
-	player->uncontracted_store[i] = new_store;
+	push_back(&(player->uncontracted_store), new_store);
 }//프로토타입과 달리 make_store의 인자로 인덱스값을 추가했습니다.
+
+void static delete_store(void* store) {
+	Store* st = (Store*)store;
+	delete_Shape(st->shape);
+	free(st);
+}
 
 int static check_Space(Cell* cell, Shape* shape) {
 	int width = get_Width(shape);
@@ -77,68 +83,58 @@ int static check_Space(Cell* cell, Shape* shape) {
 	return 1;
 }
 
-void simulate(Player * player) {
+int simulate(Player * player) {
 	int profit = 0; // 플레이어 이익
 	int num = 0; //가게수
 	int i = 0;
-	num = (int)_msize(player->contracted_store) / sizeof(Store);
-	for (i = 0; i < num; i++) {
-		player->contracted_store[i].money = player->contracted_store[i].income - player->contracted_store[i].rent;
-		//각 가게 자산 = 수익 - 임대료
-		//렌트비 못내면 어떻게 할지 구현
-		player->money += player->contracted_store[i].rent;//각 가게 임대료만큼 플레이어 자산 증가
+	Node* iter;
+	Store* temp;
+	double dif;
+	for (iter = player->contracted_store.head.after; iter != &(player->contracted_store.tail); iter = iter->after) {
+		temp = (Store*)(iter->item);
+		/* 세입자 수입 증가 */
+		temp->money += temp->income;
+		dif = 1.0 + (((rand() % 21) - 10) / 100.0f);
+		temp->income = (int)(temp->income * dif);
+		temp->money -= temp->rent;
+		player->money += temp->rent;
 	}
-	player->money -= (player->building->level * TAX);//층*세금 만큼 플레이어 자산 감소
 
+	player->money -= (player->building->level * TAX);//층*세금 만큼 플레이어 자산 감소
+	refresh_store(player);
+	if (player->money < 0) {
+		return 1;
+	}
+	return 0;
 }//프로토타입과 달리 인자에서 Store*를 뺐습니다.
 
 void refresh_store(Player * player) {
 	player->reroll = player->reroll + 1;
 	srand((unsigned)time(NULL));
+	delete_All(&(player->uncontracted_store), delete_store);
 	int i = 0;
 	for (i = 0; i < SNUM; i++) {
 		make_store(player, i);
 	}
 }
 
-void rent_store(Player* player, Store* store) {
+int rent_store(Player* player,int level ,Store* store) {
 	Floor* dest_floor;
 	Cell* cell;
-	int size, level, menu;
-	
-	printf("개약 해지할 가게가 있는 층을 선택하세요\n");
-	scanf("%d", &level);
+	int size;
 
-	dest_floor = player->building->floor + level;
+	dest_floor = player->building->floor + (level-1);
 	size = dest_floor->width;
 	cell = dest_floor->cell;
-
-	while (1) {
-		print_Rentprocess(cell,store->shape);
-		
-		printf("1.위치 다시   2.시계회전   3.반시계회전  4.결정\n");
-		scanf("%d", &menu);
-		if (menu == 1) {
-			delete_Shape(store->shape);
-			store->shape = make_Shape(size, size);
-		}
-		else if (menu == 2)
-			rotate_Clock(store->shape);
-		else if (menu == 3)
-			rotate_CounterClock(store->shape);
-		else if (menu == 4) {
-			if (check_Space(cell, store->shape)) {
-				mapping(cell, store);
-				return;
-			}
-			else
-				printf("공간이 알맞지 않습니다...\n");
-		}
+	if (check_Space(cell, store->shape)) {
+		mapping(cell, store);
+		/* player 자료구조에 등록 */
+		delete_ById(&(player->uncontracted_store), NULL, store->id);
+		store->level = level - 1;
+		push_back(&(player->contracted_store), (void*)store);
+		return 0;
 	}
-
-	/*                   WARNING! 
-	 *player의 contract 자료구조에 채워 넣는 부분이 필요함 
-	 */
+	return 1;
 }
 
 void kick_store(Building* b_addr) {
