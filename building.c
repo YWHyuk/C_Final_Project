@@ -24,8 +24,8 @@ void expand_BLD(Player* player) {
 	
 	width = player->building->floor->width;
 
-	setCursorXY(57, 15);
-	printf("확장할 건물의 층 수를 입력하세요 :");
+	setCursorXY(59, 10);
+	printf("확장할 건물의 층 수를 입력하세요");
 	add_level = get_IntByArrow(player->money);
 	clear_right_rect();
 	/* Need to implement player money 차감 */

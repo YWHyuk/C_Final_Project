@@ -33,11 +33,6 @@ int static unmapping(Building* b_addr, int level, int idnum) {
 			}
 		}
 	}
-
-	if (!temp_store)
-		return 1;
-	else
-		delete_Shape(temp_store->shape);
 	return 0;
 }
 
@@ -90,14 +85,26 @@ int simulate(Player * player) {
 	Node* iter;
 	Store* temp;
 	double dif;
-	for (iter = player->contracted_store.head.after; iter != &(player->contracted_store.tail); iter = iter->after) {
+	for (iter = player->contracted_store.head.after; iter != &(player->contracted_store.tail); ) {
 		temp = (Store*)(iter->item);
 		/* 세입자 수입 증가 */
 		temp->money += temp->income;
 		dif = 1.0 + (((rand() % 21) - 10) / 100.0f);
 		temp->income = (int)(temp->income * dif);
-		temp->money -= temp->rent;
-		player->money += temp->rent;
+		if (temp->money < temp->rent) {
+			iter = iter->after;
+			player->money += temp->money;
+			/* 자동으로 파산한 가게는 kick */
+			bankrupted_store_info(temp);
+			print_Focus_shape(player, player->building->floor[temp->level].cell, temp);
+			unmapping(player->building, temp->level, temp->id);
+			delete_ById(&(player->contracted_store), delete_store, temp->id);
+			getVirtualKeyCode();
+		}else{
+			temp->money -= temp->rent;
+			player->money += temp->rent;
+			iter = iter->after;
+		}
 	}
 
 	player->money -= (player->building->level * TAX);//층*세금 만큼 플레이어 자산 감소

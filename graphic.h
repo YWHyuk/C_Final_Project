@@ -20,3 +20,4 @@ void show_ui(Player* player);
 void clear_all();
 void clear_right_rect();
 int get_IntByArrow(int money);
+void bankrupted_store_info(Store* store);

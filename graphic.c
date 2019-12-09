@@ -364,15 +364,17 @@ void show_ui_rent_command() {
 	printf("W: 반시계 방향 회전 R: 계약하기");
 }
 void show_ui_store_info(Store* store) {
-	setCursorXY(75, 4);
-	printf("▲");
-	setCursorXY(75, 25);
-	printf("▼");
+	
 	if(store == NULL){
-		setCursorXY(60, 19);
+		setCursorXY(60, 14);
 		printf("해당 층은 입주한 가게가 없습니다");
 	}
 	else {
+		setCursorXY(75, 4);
+		printf("▲");
+		setCursorXY(75, 25);
+		printf("▼");
+
 		setCursorXY(66, 19);
 		printf("가게이름 : %9s", store->name);
 
@@ -386,7 +388,17 @@ void show_ui_store_info(Store* store) {
 		printf("재산   : %9d원", store->money);
 	}
 }
-
+void bankrupted_store_info(Store* store) {
+	clear_right_rect();
+	setCursorXY(64, 10);
+	printf("해당 가게가 파산했습니다.");
+	setCursorXY(64, 12);
+	printf("가게이름 : %9s", store->name);
+	setCursorXY(64, 14);
+	printf("입주 층  :       %03d", store->level + 1);
+	setCursorXY(68, 17);
+	printf("<Press Enter>");
+}
 void show_ui_floor(Player* player,Cell* cell) {
 
 	int i, j;
@@ -776,7 +788,7 @@ void print_Rentprocess(Player* player, Cell* cell, Shape* shape) {
 			printf("    ");
 		}
 	}
-	textcolor(BLACK, WHITE);
+	textcolor(WHITE, BLACK);
 }
 void print_Focus_shape(Player* player, Cell* cell, Store* store) {
 	int width = player->building->floor->width;
@@ -796,7 +808,7 @@ void print_Focus_shape(Player* player, Cell* cell, Store* store) {
 				printf("    ");
 			}
 		}
-		textcolor(BLACK, WHITE);
+		textcolor(WHITE, BLACK);
 	}
 
 	else {
@@ -817,7 +829,7 @@ void print_Focus_shape(Player* player, Cell* cell, Store* store) {
 				printf("    ");
 			}
 		}
-		textcolor(BLACK, WHITE);
+		textcolor(WHITE, BLACK);
 	}
 }
 void show_floor(Player* player, Store* store, int level) {
@@ -839,13 +851,13 @@ int get_IntByArrow(int money) {
 	int ret = 1;
 	KEY_EVENT_RECORD input;
 	while (1) {
-		setCursorXY(75, 17);
+		setCursorXY(75, 12);
 		printf("▲");
-		setCursorXY(75, 21);
+		setCursorXY(75, 16);
 		printf("▼");
-		setCursorXY(75, 19);
+		setCursorXY(75, 14);
 		printf("%d",ret);
-		setCursorXY(70, 23);
+		setCursorXY(70, 18);
 		printf("비용 : %d", FLOOR_PRICE * ret);
 
 		input = getVirtualKeyCode();
