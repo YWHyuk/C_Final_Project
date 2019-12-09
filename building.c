@@ -1,7 +1,6 @@
 ﻿#include "prototype.h"
 #include "graphic.h"
-#define WIDTH 10
-#define SET_MONEY 2000//초기자본금
+
 void init_BLD(Player* player) {
 	player->building = (Building*)malloc(sizeof(Building));
 	player->building->level = 1;

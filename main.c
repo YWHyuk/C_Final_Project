@@ -1,6 +1,6 @@
 #include "prototype.h"
 #include "graphic.h"
-int main() {
+void run() {
 	int level = select_level();
 	Player* player = init_player(level);
 	init_BLD(player);
@@ -12,5 +12,8 @@ int main() {
 	show_ui(player);
 
 	delete_BLD(player);
- 	delete_player(player);
+	delete_player(player);
+}
+int main() {
+	run();
 }

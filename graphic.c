@@ -337,7 +337,6 @@ int select_level () {
 		}
 	} while (1);
 }
-
 void show_ui_store_shape(Store* store) {
 
 	int i, j;
@@ -742,25 +741,6 @@ void clear_right_rect() {
 	setCursorXY(0, 0);
 }
 
-void show_BLD(Building* b_addr) {
-	int i = 0;
-	int j, k;
-	int height = b_addr->level;
-	int floorSize;
-	printf("-------------------------------------\n");
-	for (i = height; i > 0; i--) {
-		printf("%2d층\n", i);
-
-		floorSize = b_addr->floor[i - 1].width;
-
-		for (j = 0; j < floorSize; j++) {
-			for (k = 0; k < floorSize; k++)
-				printf("■");
-			printf("\n");
-		}
-	}
-}
-
 void print_Rentprocess(Player* player, Cell* cell, Shape* shape) {
 	int width = get_Width(shape);
 	int height = get_Height(shape);
@@ -832,21 +812,7 @@ void print_Focus_shape(Player* player, Cell* cell, Store* store) {
 		textcolor(WHITE, BLACK);
 	}
 }
-void show_floor(Player* player, Store* store, int level) {
-	int i, j;
-	Floor* dest_floor = player->building->floor + level;
-	int size = dest_floor->width;
 
-	for (i = 0; i < size; i++) {
-		for (j = 0; j < size; j++) {
-			if (dest_floor->cell[i + j].valid == 1)
-				printf("●");
-			else
-				printf("○");
-		}
-		printf("\n");
-	}
-}
 int get_IntByArrow(int money) {
 	int ret = 1;
 	KEY_EVENT_RECORD input;

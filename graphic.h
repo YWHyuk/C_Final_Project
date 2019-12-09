@@ -11,13 +11,26 @@
 #define QUIT	5
 
 int select_level();
-void show_BLD(Building* b_addr);
-void show_floor(Player* player, Store* store, int level);
-void print_Rentprocess(Player* player, Cell* cell, Shape* shape);
-void print_Focus_shape(Player* player, Cell* cell, Store* store);
-void introduction(Player* player);
+void show_ui_store_shape(Store* store);
+void show_ui_rent_command();
+void show_ui_store_info(Store* store);
+void bankrupted_store_info(Store* store);
+void show_ui_floor(Player* player, Cell* cell);
+
+void show_ui_floor_info(int level);
+void show_ui_frame();
+void show_ui_user_info(Player* player);
+void show_ui_menu(int menu);
+void show_ui_rent(Player* player, int* level);
+void show_ui_info(Player* player, int* level);
 void show_ui(Player* player);
+
 void clear_all();
 void clear_right_rect();
+
+void print_Rentprocess(Player* player, Cell* cell, Shape* shape);
+void print_Focus_shape(Player* player, Cell* cell, Store* store);
 int get_IntByArrow(int money);
-void bankrupted_store_info(Store* store);
+void slow_printf(char *str);
+
+void introduction(Player* player);

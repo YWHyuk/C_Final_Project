@@ -45,13 +45,14 @@ typedef struct floor{
 #define SNUM 10//가게개수
 #define TAX 1000//층당 세금
 #define WIDTH 10
+#define SET_MONEY 2000//초기자본금
 #define FLOOR_PRICE 10000
 
 //========================================================================== =
 
 int rent_store(Player* player,int level, Store* store); //사용자의 입력을 받아 입주시키기 =============>이형일
 
-void kick_store(Building* b_addr);//사용자의 입력을 받아 쫓아내기=============>이지훈
+//void kick_store(Building* b_addr);//사용자의 입력을 받아 쫓아내기=============>이지훈
 
 void expand_BLD(Player* player);//건물확장     =============> 이지훈
 

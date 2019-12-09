@@ -144,18 +144,3 @@ int rent_store(Player* player,int level ,Store* store) {
 	return 1;
 }
 
-void kick_store(Building* b_addr) {
-	int level;
-	int idnum;
-
-	printf("개약 해지할 가게가 있는 층을 선택하세요\n");
-	scanf("%d", &level);
-
-	printf("계약 해지할 가게를 골라주세요\n");
-	scanf("%d", &idnum);
-
-	if (unmapping(b_addr, level, idnum) == 0)
-		printf("계약이 해지 되었습니다\n");
-	else 
-		printf("해당 가게가 존재하지 않습니다\n");
-}
