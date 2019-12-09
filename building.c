@@ -22,10 +22,14 @@ void expand_BLD(Player* player) {
 	int level = player->building->level;
 	
 	width = player->building->floor->width;
-
+	
+	clear_right_rect();
+	
 	setCursorXY(59, 10);
 	printf("확장할 건물의 층 수를 입력하세요");
 	add_level = get_IntByArrow(player->money);
+	if (!add_level)
+		return;
 	clear_right_rect();
 	/* Need to implement player money 차감 */
 
@@ -48,6 +52,7 @@ void expand_BLD(Player* player) {
 	}
 	setCursorXY(57, y++);
 	printf("현재 건물의 층수는 %03d 층 입니다\n", player->building->level);
+	getVirtualKeyCode();
 }
 
 Player* init_player(int difficulty) {

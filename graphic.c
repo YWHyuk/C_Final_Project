@@ -706,9 +706,7 @@ void show_ui(Player* player) {
 				show_ui_rent(player, &level);
 				break;
 			case EXPAND:
-				clear_right_rect();
 				expand_BLD(player);
-				getVirtualKeyCode();
 				break;
 			case INFO:
 				show_ui_info(player, &level);
@@ -829,7 +827,7 @@ int get_IntByArrow(int money) {
 		input = getVirtualKeyCode();
 		switch (input.wVirtualKeyCode) {
 		case VK_UP:
-			ret = ret >= 9 ? 0 : ret + 1;
+			ret = ret >= 9 ? 1 : ret + 1;
 			break;
 		case VK_DOWN:
 			ret = ret <= 1 ? 9 : ret - 1;
@@ -837,9 +835,10 @@ int get_IntByArrow(int money) {
 		case VK_RETURN:
 			if (money > FLOOR_PRICE * ret)
 				return ret;
-			else
+			else {
 				MessageBox(NULL, _T("돈이 부족합니다!"), _T("알림"), MB_OK);
-			break;
+				return 0;
+			}
 		}
 	}
 }
