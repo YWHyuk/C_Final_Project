@@ -476,13 +476,13 @@ void show_ui_frame() {
 
 
 	setCursorXY(60, 31);
-	printf("┌────────────────────────┐");
+	printf("┌───────────────────────────┐");
 	setCursorXY(60, 32);
 	printf("│");
 	setCursorXY(88, 32);
 	printf("│");
 	setCursorXY(60, 33);
-	printf("└────────────────────────┘");
+	printf("└───────────────────────────┘");
 
 	setCursorXY(13, 30);
 	printf("┌───┐");
