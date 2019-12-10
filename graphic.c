@@ -378,13 +378,13 @@ void show_ui_store_info(Store* store) {
 		printf("가게이름 : %9s", store->name);
 
 		setCursorXY(66, 20);
-		printf("임대료 : %9d원", store->rent);
+		printf("임대료   : %5d만원", store->rent);
 
 		setCursorXY(66, 21);
-		printf("수익   : %9d원", store->income);
+		printf("수익     : %5d만원", store->income);
 
 		setCursorXY(66, 22);
-		printf("재산   : %9d원", store->money);
+		printf("재산     : %5d만원", store->money);
 	}
 }
 void bankrupted_store_info(Store* store) {
@@ -479,7 +479,7 @@ void show_ui_frame() {
 	printf("┌────────────────────────┐");
 	setCursorXY(60, 32);
 	printf("│");
-	setCursorXY(85, 32);
+	setCursorXY(88, 32);
 	printf("│");
 	setCursorXY(60, 33);
 	printf("└────────────────────────┘");
@@ -506,7 +506,7 @@ void show_ui_user_info(Player* player) {
 	printf("전체 건물층수 :%03d층",player->building->level);//추가
 
 	setCursorXY(62, 32);
-	printf("현재 재산 : %8d원",player->money);//추가
+	printf("현재 재산 : %10d만원", player->money);//추가
 }
 void show_ui_menu(int menu) {
 	textcolor(WHITE, BLACK);
