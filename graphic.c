@@ -357,7 +357,7 @@ void show_ui_store_shape(Store* store) {
 }
 void show_ui_rent_command() {
 	setCursorXY(58, 26);
-	printf("Q: 모양 재설정  W: 시계 방향 회전");
+	printf("Q: 모양 재설정  E: 시계 방향 회전");
 
 	setCursorXY(58, 27);
 	printf("W: 반시계 방향 회전 R: 계약하기");
