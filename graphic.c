@@ -7,14 +7,10 @@
 #include <stdlib.h>
 #include <math.h>
 
-int select_level () {
+int select_difficulty () {
 
 	KEY_EVENT_RECORD input;
-	int level = 4;
-	
-	setConsoleSize(50, 40);
-	setFontSize(12);
-
+	int difficulty = 4;
 	setCursorXY(70, 3);
 	printf("──────────────────");
 	setCursorXY(73, 4);
@@ -29,67 +25,67 @@ int select_level () {
 	
 	do {
 		setCursorXY(74, 9);
-		printf("%d분위 지역", level);
+		printf("%d분위 지역", difficulty);
 
-		switch (level) {
+		switch (difficulty) {
 		case 4:
-			setCursorXY(0, 0);
-			printf("                                                            \n");
-			setCursorXY(0, 1);
-			printf("                                    ■■    ■              \n");
 			setCursorXY(0, 2);
-			printf("                                    ■■■■■■            \n");
+			printf("                                                            \n");
 			setCursorXY(0, 3);
-			printf("                                  ■■■■■■■            \n");
+			printf("                                    ■■    ■              \n");
 			setCursorXY(0, 4);
-			printf("                                ■■■■■■■■            \n");
+			printf("                                    ■■■■■■            \n");
 			setCursorXY(0, 5);
-			printf("                                ■■■■■■■■            \n");
+			printf("                                  ■■■■■■■            \n");
 			setCursorXY(0, 6);
-			printf("                      □□□    ■■■■■■■■■          \n");
+			printf("                                ■■■■■■■■            \n");
 			setCursorXY(0, 7);
-			printf("                    □□□□    ■■■■■■■■■          \n");
+			printf("                                ■■■■■■■■            \n");
 			setCursorXY(0, 8);
-			printf("                    □□□□□□□□■■■■■■■          \n");
+			printf("                      □□□    ■■■■■■■■■          \n");
 			setCursorXY(0, 9);
-			printf("                    □□□□□□□□■■□■■■■          \n");
+			printf("                    □□□□    ■■■■■■■■■          \n");
 			setCursorXY(0, 10);
-			printf("                    □□□□□□□□□□□□■■■■        \n");
+			printf("                    □□□□□□□□■■■■■■■          \n");
 			setCursorXY(0, 11);
-			printf("    □□            □□□□□□□□□□□□■■■          \n");
+			printf("                    □□□□□□□□■■□■■■■          \n");
 			setCursorXY(0, 12);
-			printf("    □□□      □□□□□□□□□□□□□□□■■          \n");
+			printf("                    □□□□□□□□□□□□■■■■        \n");
 			setCursorXY(0, 13);
-			printf("    □□□□  □□□□□□□□□□□□□□□□■            \n");
+			printf("    □□            □□□□□□□□□□□□■■■          \n");
 			setCursorXY(0, 14);
-			printf("  □□□□□□  □□□□□□□□□□□□□□□□      □□□\n");
+			printf("    □□□      □□□□□□□□□□□□□□□■■          \n");
 			setCursorXY(0, 15);
-			printf("  □□□□□□    □□□□□□□□□□□□□□□□  □□□□\n");
+			printf("    □□□□  □□□□□□□□□□□□□□□□■            \n");
 			setCursorXY(0, 16);
-			printf("    □□□□□□        □□□□□□□□□□□□  □□□□□\n");
+			printf("  □□□□□□  □□□□□□□□□□□□□□□□      □□□\n");
 			setCursorXY(0, 17);
-			printf("        □□□□□□□    □□□□□    □□□□  □□□    \n");
+			printf("  □□□□□□    □□□□□□□□□□□□□□□□  □□□□\n");
 			setCursorXY(0, 18);
-			printf("        □□□□□□□□    □□    □□        □□□□    \n");
+			printf("    □□□□□□        □□□□□□□□□□□□  □□□□□\n");
 			setCursorXY(0, 19);
-			printf("        □□□□□□□□□        □□□□□□□□□□      \n");
+			printf("        □□□□□□□    □□□□□    □□□□  □□□    \n");
 			setCursorXY(0, 20);
-			printf("        □□□□□□□□□□    □□□□□□□□□□□      \n");
+			printf("        □□□□□□□□    □□    □□        □□□□    \n");
 			setCursorXY(0, 21);
-			printf("        □□□□□□□□□□□□□□□□□□□□□□□□    \n");
+			printf("        □□□□□□□□□        □□□□□□□□□□      \n");
 			setCursorXY(0, 22);
-			printf("        □□    ■■□□□□□□□□□□□□□□□□□□    \n");
+			printf("        □□□□□□□□□□    □□□□□□□□□□□      \n");
 			setCursorXY(0, 23);
-			printf("                ■■□□□□□□□□□□□□□□□□□      \n");
+			printf("        □□□□□□□□□□□□□□□□□□□□□□□□    \n");
 			setCursorXY(0, 24);
-			printf("                ■■■□□□□□□□□□□□□□□□        \n");
+			printf("        □□    ■■□□□□□□□□□□□□□□□□□□    \n");
 			setCursorXY(0, 25);
-			printf("                  ■■□□□□□      □□□□□            \n");
+			printf("                ■■□□□□□□□□□□□□□□□□□      \n");
 			setCursorXY(0, 26);
-			printf("                  ■■  □□            □□□              \n");
+			printf("                ■■■□□□□□□□□□□□□□□□        \n");
 			setCursorXY(0, 27);
-			printf("                                        □                  \n");
+			printf("                  ■■□□□□□      □□□□□            \n");
 			setCursorXY(0, 28);
+			printf("                  ■■  □□            □□□              \n");
+			setCursorXY(0, 29);
+			printf("                                        □                  \n");
+			setCursorXY(0, 30);
 			printf("                                                            \n");
 
 			setCursorXY(62, 11);
@@ -100,63 +96,63 @@ int select_level () {
 
 			break;
 		case 3:
-			setCursorXY(0, 0);
-			printf("                                                            \n");
-			setCursorXY(0, 1);
-			printf("                                    □□    □              \n");
 			setCursorXY(0, 2);
-			printf("                                    □□□□□□            \n");
+			printf("                                                            \n");
 			setCursorXY(0, 3);
-			printf("                                  □□□□□□□            \n");
+			printf("                                    □□    □              \n");
 			setCursorXY(0, 4);
-			printf("                                □□□□□□□□            \n");
+			printf("                                    □□□□□□            \n");
 			setCursorXY(0, 5);
-			printf("                                □□□□□□□□            \n");
+			printf("                                  □□□□□□□            \n");
 			setCursorXY(0, 6);
-			printf("                      ■■■    □□□□□□□□□          \n");
+			printf("                                □□□□□□□□            \n");
 			setCursorXY(0, 7);
-			printf("                    ■■■■    □□□□□□□□□          \n");
+			printf("                                □□□□□□□□            \n");
 			setCursorXY(0, 8);
-			printf("                    ■■■■□□■■□□□□□□□          \n");
+			printf("                      ■■■    □□□□□□□□□          \n");
 			setCursorXY(0, 9);
-			printf("                    ■■■□□□■■□□■□□□□          \n");
+			printf("                    ■■■■    □□□□□□□□□          \n");
 			setCursorXY(0, 10);
-			printf("                    ■■■■□□■■■■■■□□□□        \n");
+			printf("                    ■■■■□□■■□□□□□□□          \n");
 			setCursorXY(0, 11);
-			printf("    ■■            ■■■■□□■■■■■■□□□          \n");
+			printf("                    ■■■□□□■■□□■□□□□          \n");
 			setCursorXY(0, 12);
-			printf("    ■■■      □■■■■■□□□■■■■■■□□          \n");
+			printf("                    ■■■■□□■■■■■■□□□□        \n");
 			setCursorXY(0, 13);
-			printf("    ■■■■  □□□□■■■□□□□■■■■■□            \n");
+			printf("    ■■            ■■■■□□■■■■■■□□□          \n");
 			setCursorXY(0, 14);
-			printf("  ■■■■■■  □□□□■■■□□□□□□■■□      □□□\n");
+			printf("    ■■■      □■■■■■□□□■■■■■■□□          \n");
 			setCursorXY(0, 15);
-			printf("  ■■■■■■    □□□□□□□□□□□□□□□□  □□□□\n");
+			printf("    ■■■■  □□□□■■■□□□□■■■■■□            \n");
 			setCursorXY(0, 16);
-			printf("    ■■■■■■        □□□□□□□□□□□□  □□□□□\n");
+			printf("  ■■■■■■  □□□□■■■□□□□□□■■□      □□□\n");
 			setCursorXY(0, 17);
-			printf("        □■■□□□□    □□□□□    □□□□  □□□    \n");
+			printf("  ■■■■■■    □□□□□□□□□□□□□□□□  □□□□\n");
 			setCursorXY(0, 18);
-			printf("        □□□□□□□□    □□    □□        □□□□    \n");
+			printf("    ■■■■■■        □□□□□□□□□□□□  □□□□□\n");
 			setCursorXY(0, 19);
-			printf("        □□□□□□□□□        □□□□□□□□□□      \n");
+			printf("        □■■□□□□    □□□□□    □□□□  □□□    \n");
 			setCursorXY(0, 20);
-			printf("        ■■■■■□□□□□    □□□□□□□□□□□      \n");
+			printf("        □□□□□□□□    □□    □□        □□□□    \n");
 			setCursorXY(0, 21);
-			printf("        ■■■■■□□■■□□□□□□□□□□□□□□□    \n");
+			printf("        □□□□□□□□□        □□□□□□□□□□      \n");
 			setCursorXY(0, 22);
-			printf("        ■■    □□■■■■□□□□□□□□□□□□□□    \n");
+			printf("        ■■■■■□□□□□    □□□□□□□□□□□      \n");
 			setCursorXY(0, 23);
-			printf("                □□■■■■■□□□□□□□□□□□□      \n");
+			printf("        ■■■■■□□■■□□□□□□□□□□□□□□□    \n");
 			setCursorXY(0, 24);
-			printf("                □□□■■■■■□□□□□□□□□□        \n");
+			printf("        ■■    □□■■■■□□□□□□□□□□□□□□    \n");
 			setCursorXY(0, 25);
-			printf("                  □□■■■■■      □□□□□            \n");
+			printf("                □□■■■■■□□□□□□□□□□□□      \n");
 			setCursorXY(0, 26);
-			printf("                  □□  ■■            □□□              \n");
+			printf("                □□□■■■■■□□□□□□□□□□        \n");
 			setCursorXY(0, 27);
-			printf("                                        □                  \n");
+			printf("                  □□■■■■■      □□□□□            \n");
 			setCursorXY(0, 28);
+			printf("                  □□  ■■            □□□              \n");
+			setCursorXY(0, 29);
+			printf("                                        □                  \n");
+			setCursorXY(0, 30);
 			printf("                                                            \n");
 			
 			setCursorXY(62, 11);
@@ -167,63 +163,63 @@ int select_level () {
 
 			break;
 		case 2:
-			setCursorXY(0, 0);
-			printf("                                                            \n");
-			setCursorXY(0, 1);
-			printf("                                    □□    □              \n");
 			setCursorXY(0, 2);
-			printf("                                    □□□□□□            \n");
+			printf("                                                            \n");
 			setCursorXY(0, 3);
-			printf("                                  □□□□□□□            \n");
+			printf("                                    □□    □              \n");
 			setCursorXY(0, 4);
-			printf("                                □□□□□□□□            \n");
+			printf("                                    □□□□□□            \n");
 			setCursorXY(0, 5);
-			printf("                                □□□□□□□□            \n");
+			printf("                                  □□□□□□□            \n");
 			setCursorXY(0, 6);
-			printf("                      □□□    □□□□□□□□□          \n");
+			printf("                                □□□□□□□□            \n");
 			setCursorXY(0, 7);
-			printf("                    □□□□    □□□□□□□□□          \n");
+			printf("                                □□□□□□□□            \n");
 			setCursorXY(0, 8);
-			printf("                    □□□□■■□□□□□□□□□          \n");
+			printf("                      □□□    □□□□□□□□□          \n");
 			setCursorXY(0, 9);
-			printf("                    □□□■■■□□□□□□□□□          \n");
+			printf("                    □□□□    □□□□□□□□□          \n");
 			setCursorXY(0, 10);
-			printf("                    □□□□■■□□□□□□□□□□        \n");
+			printf("                    □□□□■■□□□□□□□□□          \n");
 			setCursorXY(0, 11);
-			printf("    □□            □□□□■■□□□□□□□□□          \n");
+			printf("                    □□□■■■□□□□□□□□□          \n");
 			setCursorXY(0, 12);
-			printf("    □□□      ■□□□□□■■■□□□□□□□□          \n");
+			printf("                    □□□□■■□□□□□□□□□□        \n");
 			setCursorXY(0, 13);
-			printf("    □□□□  ■■■■□□□■■■■□□□□□□            \n");
+			printf("    □□            □□□□■■□□□□□□□□□          \n");
 			setCursorXY(0, 14);
-			printf("  □□□□□□  ■■■■□□□■■■■■■□□■      ■■■\n");
+			printf("    □□□      ■□□□□□■■■□□□□□□□□          \n");
 			setCursorXY(0, 15);
-			printf("  □□□□□□    ■■■■■■■■■■■■■■■■  ■■■■\n");
+			printf("    □□□□  ■■■■□□□■■■■□□□□□□            \n");
 			setCursorXY(0, 16);
-			printf("    □□□□□□        ■■□□□□■■■■■■  ■■■■■\n");
+			printf("  □□□□□□  ■■■■□□□■■■■■■□□■      ■■■\n");
 			setCursorXY(0, 17);
-			printf("        ■□□■■■■    □□□□□    ■■■■  □■■    \n");
+			printf("  □□□□□□    ■■■■■■■■■■■■■■■■  ■■■■\n");
 			setCursorXY(0, 18);
-			printf("        ■■■■■■■■    □□    □□        □□■■    \n");
+			printf("    □□□□□□        ■■□□□□■■■■■■  ■■■■■\n");
 			setCursorXY(0, 19);
-			printf("        ■■■■■■■■■        □□□□□□□□□□      \n");
+			printf("        ■□□■■■■    □□□□□    ■■■■  □■■    \n");
 			setCursorXY(0, 20);
-			printf("        □□□□□■■■■■    □□□□□□□□□□□      \n");
+			printf("        ■■■■■■■■    □□    □□        □□■■    \n");
 			setCursorXY(0, 21);
-			printf("        □□□□□■■□□■■■□□□□□□□□□□□□    \n");
+			printf("        ■■■■■■■■■        □□□□□□□□□□      \n");
 			setCursorXY(0, 22);
-			printf("        □□    ■■□□□□■■□□□□□□□□□□□□    \n");
+			printf("        □□□□□■■■■■    □□□□□□□□□□□      \n");
 			setCursorXY(0, 23);
-			printf("                ■■□□□□□□□□□□□□□□□□□      \n");
+			printf("        □□□□□■■□□■■■□□□□□□□□□□□□    \n");
 			setCursorXY(0, 24);
-			printf("                ■■■□□□□□□□□□□□□□□□        \n");
+			printf("        □□    ■■□□□□■■□□□□□□□□□□□□    \n");
 			setCursorXY(0, 25);
-			printf("                  ■■□□□□□      □□□□□            \n");
+			printf("                ■■□□□□□□□□□□□□□□□□□      \n");
 			setCursorXY(0, 26);
-			printf("                  ■■  □□            □□□              \n");
+			printf("                ■■■□□□□□□□□□□□□□□□        \n");
 			setCursorXY(0, 27);
-			printf("                                        □                  \n");
+			printf("                  ■■□□□□□      □□□□□            \n");
 			setCursorXY(0, 28);
+			printf("                  ■■  □□            □□□              \n");
+			setCursorXY(0, 29);
+			printf("                                        □                  \n");
+			setCursorXY(0, 30);
 			printf("                                                            \n");
 			
 			setCursorXY(62, 11);
@@ -234,63 +230,63 @@ int select_level () {
 
 			break;
 		case 1:
-			setCursorXY(0, 0);
-			printf("                                                            \n");
-			setCursorXY(0, 1);
-			printf("                                    □□    □              \n");
 			setCursorXY(0, 2);
-			printf("                                    □□□□□□            \n");
+			printf("                                                            \n");
 			setCursorXY(0, 3);
-			printf("                                  □□□□□□□            \n");
+			printf("                                    □□    □              \n");
 			setCursorXY(0, 4);
-			printf("                                □□□□□□□□            \n");
+			printf("                                    □□□□□□            \n");
 			setCursorXY(0, 5);
-			printf("                                □□□□□□□□            \n");
+			printf("                                  □□□□□□□            \n");
 			setCursorXY(0, 6);
-			printf("                      □□□    □□□□□□□□□          \n");
+			printf("                                □□□□□□□□            \n");
 			setCursorXY(0, 7);
-			printf("                    □□□□    □□□□□□□□□          \n");
+			printf("                                □□□□□□□□            \n");
 			setCursorXY(0, 8);
-			printf("                    □□□□□□□□□□□□□□□          \n");
+			printf("                      □□□    □□□□□□□□□          \n");
 			setCursorXY(0, 9);
-			printf("                    □□□□□□□□□□□□□□□          \n");
+			printf("                    □□□□    □□□□□□□□□          \n");
 			setCursorXY(0, 10);
-			printf("                    □□□□□□□□□□□□□□□□        \n");
+			printf("                    □□□□□□□□□□□□□□□          \n");
 			setCursorXY(0, 11);
-			printf("    □□            □□□□□□□□□□□□□□□          \n");
+			printf("                    □□□□□□□□□□□□□□□          \n");
 			setCursorXY(0, 12);
-			printf("    □□□      □□□□□□□□□□□□□□□□□          \n");
+			printf("                    □□□□□□□□□□□□□□□□        \n");
 			setCursorXY(0, 13);
-			printf("    □□□□  □□□□□□□□□□□□□□□□□            \n");
+			printf("    □□            □□□□□□□□□□□□□□□          \n");
 			setCursorXY(0, 14);
-			printf("  □□□□□□  □□□□□□□□□□□□□□□□      □□□\n");
+			printf("    □□□      □□□□□□□□□□□□□□□□□          \n");
 			setCursorXY(0, 15);
-			printf("  □□□□□□    □□□□□□□□□□□□□□□□  □□□□\n");
+			printf("    □□□□  □□□□□□□□□□□□□□□□□            \n");
 			setCursorXY(0, 16);
-			printf("    □□□□□□        □□■■■■□□□□□□  □□□□□\n");
+			printf("  □□□□□□  □□□□□□□□□□□□□□□□      □□□\n");
 			setCursorXY(0, 17);
-			printf("        □□□□□□□    ■■■■■    □□□□  ■□□    \n");
+			printf("  □□□□□□    □□□□□□□□□□□□□□□□  □□□□\n");
 			setCursorXY(0, 18);
-			printf("        □□□□□□□□    ■■    ■■        ■■□□    \n");
+			printf("    □□□□□□        □□■■■■□□□□□□  □□□□□\n");
 			setCursorXY(0, 19);
-			printf("        □□□□□□□□□        ■■■■■■■■■■      \n");
+			printf("        □□□□□□□    ■■■■■    □□□□  ■□□    \n");
 			setCursorXY(0, 20);
-			printf("        □□□□□□□□□□    ■■■■■■■■■■■      \n");
+			printf("        □□□□□□□□    ■■    ■■        ■■□□    \n");
 			setCursorXY(0, 21);
-			printf("        □□□□□□□■■□□□■■■■■■■■■■■■    \n");
+			printf("        □□□□□□□□□        ■■■■■■■■■■      \n");
 			setCursorXY(0, 22);
-			printf("        □□    □□■■■■□□■■■■■■■■■■■■    \n");
+			printf("        □□□□□□□□□□    ■■■■■■■■■■■      \n");
 			setCursorXY(0, 23);
-			printf("                □□■■■■■■■■■■■■■■■■■      \n");
+			printf("        □□□□□□□■■□□□■■■■■■■■■■■■    \n");
 			setCursorXY(0, 24);
-			printf("                □□□■■■■■■■■■■■■■■■        \n");
+			printf("        □□    □□■■■■□□■■■■■■■■■■■■    \n");
 			setCursorXY(0, 25);
-			printf("                  □□■■■■■      ■■■■■            \n");
+			printf("                □□■■■■■■■■■■■■■■■■■      \n");
 			setCursorXY(0, 26);
-			printf("                  □□  ■■            ■■■              \n");
+			printf("                □□□■■■■■■■■■■■■■■■        \n");
 			setCursorXY(0, 27);
-			printf("                                        ■                  \n");
+			printf("                  □□■■■■■      ■■■■■            \n");
 			setCursorXY(0, 28);
+			printf("                  □□  ■■            ■■■              \n");
+			setCursorXY(0, 29);
+			printf("                                        ■                  \n");
+			setCursorXY(0, 30);
 			printf("                                                            \n");
 
 			setCursorXY(62, 11);
@@ -308,31 +304,31 @@ int select_level () {
 
 		switch (input.wVirtualKeyCode) {
 		case VK_UP:
-			if (level > 1)
-				level--;
+			if (difficulty > 1)
+				difficulty--;
 			else
-				level = 4;
+				difficulty = 4;
 			break;
 		case VK_DOWN:
-			if (level < 4)
-				level++;
+			if (difficulty < 4)
+				difficulty++;
 			else
-				level = 1;
+				difficulty = 1;
 			break;
 		case VK_LEFT:
-			if (level > 1)
-				level--;
+			if (difficulty > 1)
+				difficulty--;
 			else
-				level = 4;
+				difficulty = 4;
 			break;
 		case VK_RIGHT:
-			if (level < 4)
-				level++;
+			if (difficulty < 4)
+				difficulty++;
 			else
-				level = 1;
+				difficulty = 1;
 			break;
 		default:
-			return level;
+			return difficulty;
 			break;
 		}
 	} while (1);
@@ -378,13 +374,13 @@ void show_ui_store_info(Store* store) {
 		printf("가게이름 : %9s", store->name);
 
 		setCursorXY(66, 20);
-		printf("임대료 : %9d원", store->rent);
+		printf("임대료   : %5d만원", store->rent);
 
 		setCursorXY(66, 21);
-		printf("수익   : %9d원", store->income);
+		printf("수익     : %5d만원", store->income);
 
 		setCursorXY(66, 22);
-		printf("재산   : %9d원", store->money);
+		printf("재산     : %5d만원", store->money);
 	}
 }
 void bankrupted_store_info(Store* store) {
@@ -476,13 +472,13 @@ void show_ui_frame() {
 
 
 	setCursorXY(60, 31);
-	printf("┌────────────────────────┐");
+	printf("┌───────────────────────────┐");
 	setCursorXY(60, 32);
 	printf("│");
-	setCursorXY(85, 32);
+	setCursorXY(88, 32);
 	printf("│");
 	setCursorXY(60, 33);
-	printf("└────────────────────────┘");
+	printf("└───────────────────────────┘");
 
 	setCursorXY(13, 30);
 	printf("┌───┐");
@@ -506,7 +502,7 @@ void show_ui_user_info(Player* player) {
 	printf("전체 건물층수 :%03d층",player->building->level);//추가
 
 	setCursorXY(62, 32);
-	printf("현재 재산 : %8d원",player->money);//추가
+	printf("현재 재산 : %10d만원", player->money);//추가
 }
 void show_ui_menu(int menu) {
 	textcolor(WHITE, BLACK);
@@ -860,6 +856,8 @@ void slow_printf(char *str) {
 	return;
 }
 
+
+
 void introduction(Player* player) {
 	char buffer[1024];
 	
@@ -877,3 +875,342 @@ void introduction(Player* player) {
 	slow_printf(buffer);
 
 }
+
+void intro_building() {
+	int i;
+	int j;
+	for (i = 40; i > 0; i--) {
+
+		j = 40 - i;
+
+
+		if (j >= 0){
+			setCursorXY(6, i);
+			printf("                   I");
+		}
+		if (j >= 1){
+			setCursorXY(6, i + 1);
+			printf("                   I");
+		}
+		if (j >= 2) {
+			setCursorXY(6, i + 2);
+			printf("        .....■■■■■■■..... ");
+		}
+		if (j >= 3) {
+			setCursorXY(6, i + 3);
+			printf("      ■■■■■■■■■■■■■■ ");
+		}
+		if (j >= 4) {
+			setCursorXY(6, i + 4);
+			printf("  ■■■■■■■■■■■■■■■■■■ ");
+		}
+		if (j >= 5) {
+			setCursorXY(6, i + 5);
+			printf("  ■■■■■■■■■■■■■■■■■■ ");
+		}
+		if (j >= 6) {
+			setCursorXY(6, i + 6);
+			printf("  ■■■■■■■■■■■■■■■■■■ ");
+		}
+		if (j >= 7) {
+			setCursorXY(6, i + 7);
+			printf("■            ■        ■            ■ ");
+		}
+		if (j >= 8) {
+			setCursorXY(6, i + 8);
+			printf("■■■■■■■■        ■■■■■■■■ ");
+		}
+		if (j >= 9) {
+			setCursorXY(6, i + 9);
+			printf("■■■■■■■■■■■■■■■■■■■■ ");
+		}
+		if (j >= 10) {
+			setCursorXY(6, i + 10);
+			printf("■■■■■■■■        ■■■■■■■■ ");
+		}
+		if (j >= 11) {
+			setCursorXY(6, i + 11);
+			printf("■            ■■■■■■            ■ ");
+		}
+		if (j >= 12) {
+			setCursorXY(6, i + 12);
+			printf("■            ■        ■            ■ ");
+		}
+		if (j >= 13) {
+			setCursorXY(6, i + 13);
+			printf("■            ■■■■■■            ■ ");
+		}
+		if (j >= 14) {
+			setCursorXY(6, i + 14);
+			printf("■::::::::::::■        ■::::::::::::■ ");
+		}
+		if (j >= 15) {
+			setCursorXY(6, i + 15);
+			printf("■■■■■■■■■■■■■■■■■■■■ ");
+		}
+		if (j >= 16) {
+			setCursorXY(6, i + 16);
+			printf("■■■■■■■■        ■■■■■■■■ ");
+		}
+		if (j >= 17) {
+			setCursorXY(6, i + 17);
+			printf("■■■■■■■■        ■■■■■■■■ ");
+		}
+		if (j >= 18) {
+			setCursorXY(6, i + 18);
+			printf("■            ■■■■■■            ■ ");
+		}
+		if (j >= 19) {
+			setCursorXY(6, i + 19);
+			printf("■            ■        ■            ■ ");
+		}
+		if (j >= 20) {
+			setCursorXY(6, i + 20);
+			printf("■            ■■■■■■            ■ ");
+		}
+		if (j >= 21) {
+			setCursorXY(6, i + 21);
+			printf("■            ■        ■            ■ ");
+		}
+		if (j >= 22) {
+			setCursorXY(6, i + 22);
+			printf("■::::::::::::■■■■■■::::::::::::■ ");
+		}
+		if (j >= 23) {
+			setCursorXY(6, i + 23);
+			printf("■■■■■■■■        ■■■■■■■■ ");
+		}
+		if (j >= 24) {
+			setCursorXY(6, i + 24);
+			printf("■■■■■■■■■■■■■■■■■■■■ ");
+		}
+		if (j >= 25) {
+			setCursorXY(6, i + 25);
+			printf("■■■■■■■■        ■■■■■■■■ ");
+		}
+		if (j >= 26) {
+			setCursorXY(6, i + 26);
+			printf("■            ■        ■            ■ ");
+		}
+		if (j >= 27) {
+			setCursorXY(6, i + 27);
+			printf("■            ■■■■■■            ■ ");
+		}
+		if (j >= 28) {
+			setCursorXY(6, i + 28);
+			printf("■            ■        ■            ■ ");
+		}
+		if (j >= 29) {
+			setCursorXY(6, i + 29);
+			printf("■::::::::::::■■■■■■::::::::::::■ ");
+		}
+		if (j >= 30) {
+			setCursorXY(6, i + 30);
+			printf("■■■■■■■■        ■■■■■■■■ ");
+		}
+		if (j >= 31) {
+			setCursorXY(6, i + 31);
+			printf("■■■■■■■■■■■■■■■■■■■■ ");
+		}
+		if (j >= 32) {
+			setCursorXY(6, i + 32);
+			printf("■■■■■■■■        ■■■■■■■■ ");
+		}
+		if (j >= 33) {
+			setCursorXY(6, i + 33);
+			printf("■            ■        ■            ■ ");
+		}
+		if (j >= 34) {
+			setCursorXY(6, i + 34);
+			printf("■            ■        ■            ■ ");
+		}
+		if (j >= 35) {
+			setCursorXY(6, i + 35);
+			printf("■            ■        ■            ■ ");
+		}
+		if (j >= 36) {
+			setCursorXY(6, i + 36);
+			printf("■            ■        ■            ■ ");
+		}
+		if (j >= 37) {
+			setCursorXY(6, i + 37);
+			printf("■::::::::::::■■■■■■::::::::::::■ ");
+		}
+		if (j >= 38) {
+			setCursorXY(6, i + 38);
+			printf("■■■■■■■■■■■■■■■■■■■■ ");
+		}
+		if (j >= 39) {
+			setCursorXY(6, i + 39);
+			printf("IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII ");
+		}
+		Sleep(50);
+	}
+}
+void intro_title() {
+
+	setCursorXY(50, 6);
+	printf("┌────┐");
+	setCursorXY(50, 7);
+	printf("│  □│");
+	setCursorXY(50, 8);
+	printf("│    └┐");
+	setCursorXY(50, 9);
+	printf("│  □ │");
+	setCursorXY(50, 10);
+	printf("└─────┘");
+
+	setCursorXY(57, 7);
+	printf("┌─┐ ┌─┐");
+	setCursorXY(57, 8);
+	printf("│ │ │ │");
+	setCursorXY(57, 9);
+	printf("│ └─┘ │");
+	setCursorXY(57, 10);
+	printf("└─────┘");
+
+	setCursorXY(64, 6);
+	printf("┌─┐");
+	setCursorXY(64, 7);
+	printf("└─┘");
+	setCursorXY(64, 8);
+	printf("┌─┐");
+	setCursorXY(64, 9);
+	printf("│ │");
+	setCursorXY(64, 10);
+	printf("└─┘");
+
+	setCursorXY(67, 6);
+	printf("┌─┐");
+	setCursorXY(67, 7);
+	printf("│ │");
+	setCursorXY(67, 8);
+	printf("│ │");
+	setCursorXY(67, 9);
+	printf("│ │");
+	setCursorXY(67, 10);
+	printf("└─┘");
+
+	setCursorXY(70, 6);
+	printf("   ┌─┐");
+	setCursorXY(70, 7);
+	printf("   │ │");
+	setCursorXY(70, 8);
+	printf("┌──┘ │");
+	setCursorXY(70, 9);
+	printf("│ □ │");
+	setCursorXY(70, 10);
+	printf("└────┘");
+
+	setCursorXY(76, 6);
+	printf("┌─┐");
+	setCursorXY(76, 7);
+	printf("└─┘");
+	setCursorXY(76, 8);
+	printf("┌─┐");
+	setCursorXY(76, 9);
+	printf("│ │");
+	setCursorXY(76, 10);
+	printf("└─┘");
+
+	setCursorXY(79, 7);
+	printf("┌─────┐");
+	setCursorXY(79, 8);
+	printf("│ ┌─┐ │");
+	setCursorXY(79, 9);
+	printf("│ │ │ │");
+	setCursorXY(79, 10);
+	printf("└─┘ └─┘");
+
+	setCursorXY(86, 7);
+	printf("┌─────┐");
+	setCursorXY(86, 8);
+	printf("│ ┌┐  │");
+	setCursorXY(86, 9);
+	printf("│ └┘  │");
+	setCursorXY(86, 10);
+	printf("└───┐ │");
+	setCursorXY(86, 11);
+	printf(" ┌──┘ │");
+	setCursorXY(86, 12);
+	printf(" └────┘");
+
+	setCursorXY(50, 13);
+	printf("┌─────┐");
+	setCursorXY(50, 14);
+	printf("└─┐ ┌─┘");
+	setCursorXY(50, 15);
+	printf("  │ │   ");
+	setCursorXY(50, 16);
+	printf("  │ │   ");
+	setCursorXY(50, 17);
+	printf("  └─┘   ");
+
+	setCursorXY(57, 14);
+	printf("┌─┐ ┌─┐");
+	setCursorXY(57, 15);
+	printf("│ │ │ │");
+	setCursorXY(57, 16);
+	printf("│ └ ┘ │");
+	setCursorXY(57, 17);
+	printf("└───┐ │");
+	setCursorXY(57, 18);
+	printf("    │ │");
+	setCursorXY(57, 19);
+	printf("    └─┘");
+
+	setCursorXY(64, 14);
+	printf("┌─────┐");
+	setCursorXY(64, 15);
+	printf("│ ┌───┘");
+	setCursorXY(64, 16);
+	printf("│ └───┐");
+	setCursorXY(64, 17);
+	printf("└─────┘");
+
+	setCursorXY(71, 14);
+	printf("┌─────┐");
+	setCursorXY(71, 15);
+	printf("│ ┌─┐ │");
+	setCursorXY(71, 16);
+	printf("│ └─┘ │");
+	setCursorXY(71, 17);
+	printf("└─────┘");
+
+	setCursorXY(78, 14);
+	printf("┌─────┐");
+	setCursorXY(78, 15);
+	printf("│ ┌─┐ │");
+	setCursorXY(78, 16);
+	printf("│ └─┘ │");
+	setCursorXY(78, 17);
+	printf("└─────┘");
+
+	setCursorXY(85, 14);
+	printf("┌─────┐");
+	setCursorXY(85, 15);
+	printf("│ ┌─┐ │");
+	setCursorXY(85, 16);
+	printf("│ │ │ │");
+	setCursorXY(85, 17);
+	printf("└─┘ └─┘");
+
+}
+void intro_text() {
+
+	GetAsyncKeyState(VK_SPACE);
+	while (!GetAsyncKeyState(VK_SPACE)) {
+		setCursorXY(60, 25);
+		printf("<< PRESS SPACE BAR >>");
+		Sleep(400);
+		setCursorXY(60, 25);
+		printf("                        ");
+		Sleep(400);
+	}
+
+}
+void intro() {
+	intro_building();
+	intro_title();
+	intro_text();
+}	
