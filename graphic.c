@@ -875,14 +875,19 @@ void introduction(Player* player) {
 	setCursorXY(0, CONSOLE_Y / 2 - 1);
 	slow_printf("당신의 이름은? ");
 	scanf("%s", player->name);
+	Sleep(1000);
 	sprintf(buffer, "2009년 %s는 과제를 하던 도중\n", player->name);
 	slow_printf(buffer);
+	Sleep(1000);
 	slow_printf("우연히 비트코인을 알게 되었다.\n");
-
+	Sleep(1000);
 	slow_printf("재미삼아 비트코인을 구매하게 되었고...\n\n");
+	Sleep(1000);
 	slow_printf("10년이 지난후 지금, 비트코인을 구매하게 된 사실을 떠올렸다.\n");
+	Sleep(1000);
 	sprintf(buffer, "%s는 불어난 돈으로 작은 건물을 구매하였다.\n", player->name);
 	slow_printf(buffer);
+	Sleep(2000);
 
 }
 
