@@ -29,6 +29,7 @@ int select_level () {
 	
 	do {
 		setCursorXY(74, 9);
+		setCursorVisibility(0);
 		printf("%d분위 지역", difficulty);
 
 		switch (difficulty) {
