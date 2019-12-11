@@ -857,7 +857,7 @@ void slow_printf(char *str) {
 		else
 			printf("%c",str[i]) ; //아니면 그냥 출력
 #ifndef DEBUG
-		Sleep(20);
+		Sleep(50);
 #endif
 	}
 	return;
