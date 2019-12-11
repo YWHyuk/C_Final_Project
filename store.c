@@ -85,6 +85,9 @@ int simulate(Player * player) {
 	Node* iter;
 	Store* temp;
 	double dif;
+	clear_all();
+	intro_building();
+	clear_all();
 	for (iter = player->contracted_store.head.after; iter != &(player->contracted_store.tail); ) {
 		temp = (Store*)(iter->item);
 		/* 세입자 수입 증가 */

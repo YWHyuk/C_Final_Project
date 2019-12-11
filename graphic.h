@@ -34,3 +34,4 @@ int get_IntByArrow(int money);
 void slow_printf(char *str);
 
 void introduction(Player* player);
+void intro();

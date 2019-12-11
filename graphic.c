@@ -539,7 +539,6 @@ void show_ui_rent(Player* player, int* level) {
 	setCursorVisibility(0);
 	setConsoleSize(50, 40);
 	setFontSize(12);
-	show_ui_frame();
 
 	setCursorXY(0, 37);
 
@@ -557,6 +556,8 @@ void show_ui_rent(Player* player, int* level) {
 		print_Rentprocess(player, cell, store->shape);
 		show_ui_floor_info(*level);
 
+		show_ui_frame();
+		
 		show_ui_user_info(player);
 
 		input = getVirtualKeyCode();
@@ -607,7 +608,6 @@ void show_ui_info(Player* player, int* level) {
 	setCursorVisibility(0);
 	setConsoleSize(50, 40);
 	setFontSize(12);
-	show_ui_frame();
 
 	setCursorXY(0, 37);
 
@@ -622,6 +622,8 @@ void show_ui_info(Player* player, int* level) {
 		store = (Store*)(player->contracted_store.cursor->item);
 		show_ui_store_shape(store);
 		show_ui_store_info(store);
+
+		show_ui_frame();
 
 		print_Focus_shape(player, cell, store);
 		show_ui_floor_info(*level);
@@ -664,7 +666,6 @@ void show_ui(Player* player) {
 	setCursorVisibility(0);
 	setConsoleSize(50, 40);
 	setFontSize(12);
-	show_ui_frame();
 	
 	setCursorXY(0, 37);
 
@@ -673,6 +674,8 @@ void show_ui(Player* player) {
 		cell = player->building->floor[level - 1].cell;
 
 		show_ui_menu(menu);
+		
+		show_ui_frame();
 
 		show_ui_floor(player,cell);
 		show_ui_floor_info(level);
@@ -853,8 +856,8 @@ void slow_printf(char *str) {
 		}
 		else
 			printf("%c",str[i]) ; //아니면 그냥 출력
-#ifdef DEBUG
-		Sleep(50);
+#ifndef DEBUG
+		Sleep(20);
 #endif
 	}
 	return;
@@ -864,8 +867,11 @@ void slow_printf(char *str) {
 
 void introduction(Player* player) {
 	char buffer[1024];
-	
+	setCursorVisibility(0);
 	clear_all();
+	intro();
+	clear_all();
+
 	setCursorXY(0, CONSOLE_Y / 2 - 1);
 	slow_printf("당신의 이름은? ");
 	scanf("%s", player->name);
@@ -1048,7 +1054,7 @@ void intro_building() {
 			setCursorXY(6, i + 39);
 			printf("IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII ");
 		}
-		Sleep(50);
+		Sleep(10);
 	}
 }
 void intro_title() {
