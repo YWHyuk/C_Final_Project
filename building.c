@@ -1,5 +1,6 @@
 ﻿#include "prototype.h"
 #include "graphic.h"
+#include "DoublyCircularLinkedList.h"
 
 void init_BLD(Player* player) {
 	player->building = (Building*)malloc(sizeof(Building));
@@ -78,6 +79,9 @@ void delete_BLD(Player* player) {
 	for (i = 0; i < player->building->level; i++) {
 		free(player->building->floor[i].cell);
 	}
+	delete_All(&(player->contracted_store), delete_store);
+	delete_All(&(player->uncontracted_store), delete_store);
+
 	free(player->building->floor);
 	free(player->building);
 }

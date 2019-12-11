@@ -57,7 +57,7 @@ void static make_store(Player * player, int i) {
 	push_back(&(player->uncontracted_store), new_store);
 }//프로토타입과 달리 make_store의 인자로 인덱스값을 추가했습니다.
 
-void static delete_store(void* store) {
+void delete_store(void* store) {
 	Store* st = (Store*)store;
 	delete_Shape(st->shape);
 	free(st);

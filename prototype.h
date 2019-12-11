@@ -61,6 +61,7 @@ void expand_BLD(Player* player);//건물확장     =============> 이지훈
 int simulate(Player* player);//수익을 계산해서 show =============>김민혁
 
 //========================================================================== =
+void delete_store(void* store);
 
 void refresh_store(Player* player); // 가게들을 만들어 Player의 임대안된리스트에 넣음 =============> 김민혁
 
@@ -68,6 +69,6 @@ void init_BLD(Player* player); //건물만들기 =============>
 
 Player* init_player(int difficulty); //============ = > 김민혁
 
-void delete_BLD(Player* player);
+void delete_BLD(Player* player); 
 
 void delete_player(Player* player);

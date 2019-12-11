@@ -611,11 +611,13 @@ void show_ui_info(Player* player, int* level) {
 
 	setCursorXY(0, 37);
 
-	if (player->contracted_store.cursor->item == NULL)
+	if (player->contracted_store.cursor->item == NULL )
 		find(&(player->contracted_store), (*level)-1);
-
 	/* 입력 처리 루틴 */
 	while (1) {
+		if (player->contracted_store.cursor->item->level != *level - 1)
+			find(&(player->contracted_store), (*level) - 1);
+
 		cell = player->building->floor[*level - 1].cell;
 		store = (Store*)(player->contracted_store.cursor->item);
 		show_ui_store_shape(store);
@@ -793,10 +795,8 @@ void print_Focus_shape(Player* player, Cell* cell, Store* store) {
 		for (x = 0; x < width; x++) {
 			for (y = 0; y < width; y++) {
 				if (cell[x*width + y].store == store)
-					/* 겹치는 칸 */
 					color = GREEN;
 				else if (cell[x*width + y].store == NULL)
-					/* 기존의 상점만 차지하는 칸 */
 					color = WHITE;
 				else 
 					color = RED;
