@@ -7,10 +7,14 @@
 #include <stdlib.h>
 #include <math.h>
 
-int select_difficulty () {
+int select_level () {
 
 	KEY_EVENT_RECORD input;
 	int difficulty = 4;
+	
+	setConsoleSize(50, 40);
+	setFontSize(12);
+
 	setCursorXY(70, 3);
 	printf("──────────────────");
 	setCursorXY(73, 4);

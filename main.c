@@ -1,7 +1,7 @@
 #include "prototype.h"
 #include "graphic.h"
 void run() {
-	int level = select_difficulty();
+	int level = select_level();
 	Player* player = init_player(level);
 	init_BLD(player);
 
