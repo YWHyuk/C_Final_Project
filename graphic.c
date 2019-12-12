@@ -418,7 +418,7 @@ void show_ui_floor(Player* player,Cell* cell) {
 			printf("    ");
 		}
 	}
-	textcolor(BLACK, WHITE);
+	textcolor(WHITE, BLACK);
 }
 
 void show_ui_floor_info(int level) {// 층 선택
