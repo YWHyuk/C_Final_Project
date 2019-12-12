@@ -617,7 +617,7 @@ void show_ui_info(Player* player, int* level) {
 		find(&(player->contracted_store), (*level)-1);
 	/* 입력 처리 루틴 */
 	while (1) {
-		if (player->contracted_store.cursor->item->level != *level - 1)
+		if (player->contracted_store.cursor->item != NULL && player->contracted_store.cursor->item->level != *level - 1)
 			find(&(player->contracted_store), (*level) - 1);
 
 		cell = player->building->floor[*level - 1].cell;
