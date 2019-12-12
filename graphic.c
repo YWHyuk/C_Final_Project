@@ -11,6 +11,7 @@ int select_level () {
 
 	KEY_EVENT_RECORD input;
 	int difficulty = 4;
+	textcolor(WHITE, BLACK);
 	
 	setConsoleSize(50, 40);
 	setFontSize(12);
