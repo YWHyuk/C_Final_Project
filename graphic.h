@@ -35,3 +35,4 @@ void slow_printf(char *str);
 
 void introduction(Player* player);
 void intro();
+void intro_building();
