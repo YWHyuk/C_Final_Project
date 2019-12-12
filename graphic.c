@@ -895,9 +895,9 @@ void introduction(Player* player) {
 void intro_building() {
 	int i;
 	int j;
-	for (i = 40; i > 0; i--) {
+	for (i = 39; i > 0; i--) {
 
-		j = 40 - i;
+		j = 39 - i;
 
 
 		if (j >= 0){
@@ -1055,10 +1055,6 @@ void intro_building() {
 		if (j >= 38) {
 			setCursorXY(6, i + 38);
 			printf("■■■■■■■■■■■■■■■■■■■■ ");
-		}
-		if (j >= 39) {
-			setCursorXY(6, i + 39);
-			printf("IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII ");
 		}
 		Sleep(10);
 	}
