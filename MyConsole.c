@@ -96,10 +96,10 @@ void setFontSize(int size)
 	HANDLE hcsb = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_FONT_INFOEX cfi = { sizeof(cfi) };
 
-	GetCurrentConsoleFontEx(hcsb, FALSE, &cfi);
+	//GetCurrentConsoleFontEx(hcsb, FALSE, &cfi);
 	cfi.dwFontSize.Y = size;
 
-	BOOL temp = SetCurrentConsoleFontEx(hcsb, FALSE, &cfi);
+	//BOOL temp = SetCurrentConsoleFontEx(hcsb, FALSE, &cfi);
 }
 int KeyEventProc(KEY_EVENT_RECORD ker)
 {

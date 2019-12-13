@@ -876,7 +876,7 @@ void introduction(Player* player) {
 
 	setCursorXY(0, CONSOLE_Y / 2 - 1);
 	slow_printf("당신의 이름은? ");
-	scanf("%s", player->name);
+	scanf("%9s", player->name);
 	Sleep(1000);
 	sprintf(buffer, "2009년 %s는 과제를 하던 도중\n", player->name);
 	slow_printf(buffer);
